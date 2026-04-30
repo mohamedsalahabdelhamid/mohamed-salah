@@ -1623,10 +1623,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set Copyright Year
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+    // Mobile Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+        });
+    }
+
     // Smooth Scrolling for Nav Links (adjusted)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+            
+            // Close mobile menu if open
+            if (navLinks && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            }
+
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
 
@@ -1870,11 +1897,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let lastTime = 0;
         const fpsInterval = 1000 / 30; // 30 FPS throttle
+        let animationId = null;
+        let isVisible = true;
+
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible && !animationId) {
+                animationId = requestAnimationFrame(animate);
+            }
+        }, { threshold: 0.01 });
+        observer.observe(canvas);
 
         function animate(timestamp) {
-            // إيقاف الحلقة تلقائياً عند إخفاء التب (Page Visibility API)
-            if (document.hidden) {
-                requestAnimationFrame(animate);
+            if (document.hidden || !isVisible) {
+                animationId = null;
                 return;
             }
 
@@ -1882,7 +1918,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const elapsed = timestamp - lastTime;
 
             if (elapsed < fpsInterval) {
-                requestAnimationFrame(animate);
+                animationId = requestAnimationFrame(animate);
                 return;
             }
             
@@ -1920,7 +1956,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
-            requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
         }
 
         // إعادة تشغيل الحلقة عند العودة للتب
@@ -2097,19 +2133,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const animate = () => {
-            const rect = canvas.getBoundingClientRect();
-            if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                const now = Date.now();
-                if (now - lastGlitchTime >= glitchSpeed) {
-                    updateLetters();
-                    drawLetters();
-                    lastGlitchTime = now;
-                }
+        let isVisible = true;
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible && !animationId) {
+                animationId = requestAnimationFrame(animate);
+            }
+        }, { threshold: 0.01 });
+        observer.observe(canvas);
 
-                if (smooth) {
-                    handleSmoothTransitions();
-                }
+        const animate = () => {
+            if (document.hidden || !isVisible) {
+                animationId = null;
+                return;
+            }
+
+            const now = Date.now();
+            if (now - lastGlitchTime >= glitchSpeed) {
+                updateLetters();
+                drawLetters();
+                lastGlitchTime = now;
+            }
+
+            if (smooth) {
+                handleSmoothTransitions();
             }
             animationId = requestAnimationFrame(animate);
         };
@@ -2272,41 +2319,54 @@ document.addEventListener('DOMContentLoaded', () => {
             squares.set(`${gridX},${gridY}`, 1.0);
         });
 
-        const animate = () => {
-            const rect = canvas.getBoundingClientRect();
-            if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.strokeStyle = 'rgba(16, 185, 129, 0.04)';
-                ctx.lineWidth = 1;
-                const cols = Math.ceil(canvas.width / squareSize);
-                const rows = Math.ceil(canvas.height / squareSize);
 
-                for (let x = 0; x <= cols; x++) {
-                    ctx.beginPath();
-                    ctx.moveTo(x * squareSize, 0);
-                    ctx.lineTo(x * squareSize, canvas.height);
-                    ctx.stroke();
-                }
-                for (let y = 0; y <= rows; y++) {
-                    ctx.beginPath();
-                    ctx.moveTo(0, y * squareSize);
-                    ctx.lineTo(canvas.width, y * squareSize);
-                    ctx.stroke();
-                }
 
-                for (const [key, opacity] of squares.entries()) {
-                    if (opacity <= 0) {
-                        squares.delete(key);
-                        continue;
-                    }
-                    const [gx, gy] = key.split(',').map(Number);
-                    ctx.fillStyle = `rgba(16, 185, 129, ${opacity * 0.12})`;
-                    ctx.fillRect(gx * squareSize, gy * squareSize, squareSize, squareSize);
-                    squares.set(key, opacity - 0.015);
-                }
+        let isVisible = true;
+        let animationId = null;
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible && !animationId) {
+                animationId = requestAnimationFrame(animate);
             }
-            requestAnimationFrame(animate);
+        }, { threshold: 0.01 });
+        observer.observe(canvas);
+
+        const animate = () => {
+            if (document.hidden || !isVisible) {
+                animationId = null;
+                return;
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.04)';
+            ctx.lineWidth = 1;
+            const cols = Math.ceil(canvas.width / squareSize);
+            const rows = Math.ceil(canvas.height / squareSize);
+
+            for (let x = 0; x <= cols; x++) {
+                ctx.beginPath();
+                ctx.moveTo(x * squareSize, 0);
+                ctx.lineTo(x * squareSize, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y <= rows; y++) {
+                ctx.beginPath();
+                ctx.moveTo(0, y * squareSize);
+                ctx.lineTo(canvas.width, y * squareSize);
+                ctx.stroke();
+            }
+
+            for (const [key, opacity] of squares.entries()) {
+                if (opacity <= 0) {
+                    squares.delete(key);
+                    continue;
+                }
+                const [gx, gy] = key.split(',').map(Number);
+                ctx.fillStyle = `rgba(16, 185, 129, ${opacity * 0.12})`;
+                ctx.fillRect(gx * squareSize, gy * squareSize, squareSize, squareSize);
+                squares.set(key, opacity - 0.015);
+            }
+            animationId = requestAnimationFrame(animate);
         };
         animate();
     }
@@ -2358,47 +2418,60 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        const animate = () => {
-            const rect = canvas.getBoundingClientRect();
-            if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                const centerX = canvas.width / 2;
-                const centerY = canvas.height / 2;
-                
-                const isLight = document.documentElement.classList.contains('light');
-                ctx.fillStyle = isLight ? 'rgba(244, 244, 249, 0.3)' : 'rgba(9, 10, 15, 0.3)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                for (let i = 0; i < numStars; i++) {
-                    let star = stars[i];
-                    star.z -= speed;
 
-                    if (star.z <= 0) {
-                        star.x = Math.random() * canvas.width - centerX;
-                        star.y = Math.random() * canvas.height - centerY;
-                        star.z = canvas.width;
-                        star.pz = star.z;
-                    }
-
-                    let sx = (star.x / star.z) * canvas.width + centerX;
-                    let sy = (star.y / star.z) * canvas.height + centerY;
-                    let px = (star.x / star.pz) * canvas.width + centerX;
-                    let py = (star.y / star.pz) * canvas.height + centerY;
-
-                    star.pz = star.z;
-
-                    const distSq = (sx - centerX) * (sx - centerX) + (sy - centerY) * (sy - centerY);
-                    const maxDistSq = centerX * centerX + centerY * centerY;
-                    const brightness = Math.min(1, distSq / (maxDistSq * 0.15));
-
-                    ctx.beginPath();
-                    ctx.moveTo(px, py);
-                    ctx.lineTo(sx, sy);
-                    ctx.strokeStyle = `rgba(16, 185, 129, ${brightness * 0.6})`;
-                    ctx.lineWidth = 2.0;
-                    ctx.stroke();
-                }
+        let isVisible = true;
+        let animationId = null;
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible && !animationId) {
+                animationId = requestAnimationFrame(animate);
             }
-            requestAnimationFrame(animate);
+        }, { threshold: 0.01 });
+        observer.observe(canvas);
+
+        const animate = () => {
+            if (document.hidden || !isVisible) {
+                animationId = null;
+                return;
+            }
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            const isLight = document.documentElement.classList.contains('light');
+            ctx.fillStyle = isLight ? 'rgba(244, 244, 249, 0.3)' : 'rgba(9, 10, 15, 0.3)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < numStars; i++) {
+                let star = stars[i];
+                star.z -= speed;
+
+                if (star.z <= 0) {
+                    star.x = Math.random() * canvas.width - centerX;
+                    star.y = Math.random() * canvas.height - centerY;
+                    star.z = canvas.width;
+                    star.pz = star.z;
+                }
+
+                let sx = (star.x / star.z) * canvas.width + centerX;
+                let sy = (star.y / star.z) * canvas.height + centerY;
+                let px = (star.x / star.pz) * canvas.width + centerX;
+                let py = (star.y / star.pz) * canvas.height + centerY;
+
+                star.pz = star.z;
+
+                const distSq = (sx - centerX) * (sx - centerX) + (sy - centerY) * (sy - centerY);
+                const maxDistSq = centerX * centerX + centerY * centerY;
+                const brightness = Math.min(1, distSq / (maxDistSq * 0.15));
+
+                ctx.beginPath();
+                ctx.moveTo(px, py);
+                ctx.lineTo(sx, sy);
+                ctx.strokeStyle = `rgba(16, 185, 129, ${brightness * 0.6})`;
+                ctx.lineWidth = 2.0;
+                ctx.stroke();
+            }
+            animationId = requestAnimationFrame(animate);
         };
         animate();
     }
@@ -2444,36 +2517,47 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', resize);
 
         const animate = () => {
-            const rect = canvas.getBoundingClientRect();
-            if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                const isLight = document.documentElement.classList.contains('light');
-                ctx.globalCompositeOperation = isLight ? 'source-over' : 'screen';
-
-                for (let b of blobs) {
-                    b.x += b.vx;
-                    b.y += b.vy;
-                    if (b.x < -0.2 || b.x > 1.2) b.vx *= -1;
-                    if (b.y < -0.2 || b.y > 1.2) b.vy *= -1;
-
-                    const radius = b.r * Math.max(canvas.width, canvas.height);
-                    const cx = b.x * canvas.width;
-                    const cy = b.y * canvas.height;
-
-                    const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-                    gradient.addColorStop(0, `rgba(${b.color}, 0.7)`);
-                    gradient.addColorStop(1, `rgba(${b.color}, 0)`);
-
-                    ctx.beginPath();
-                    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                }
-                ctx.globalCompositeOperation = 'source-over';
+            if (document.hidden || !isVisible) {
+                animationId = null;
+                return;
             }
-            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const isLight = document.documentElement.classList.contains('light');
+            ctx.globalCompositeOperation = isLight ? 'source-over' : 'screen';
+
+            for (let b of blobs) {
+                b.x += b.vx;
+                b.y += b.vy;
+                if (b.x < -0.2 || b.x > 1.2) b.vx *= -1;
+                if (b.y < -0.2 || b.y > 1.2) b.vy *= -1;
+
+                const radius = b.r * Math.max(canvas.width, canvas.height);
+                const cx = b.x * canvas.width;
+                const cy = b.y * canvas.height;
+
+                const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+                gradient.addColorStop(0, `rgba(${b.color}, 0.7)`);
+                gradient.addColorStop(1, `rgba(${b.color}, 0)`);
+
+                ctx.beginPath();
+                ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+            ctx.globalCompositeOperation = 'source-over';
+            animationId = requestAnimationFrame(animate);
         };
+
+        let isVisible = true;
+        let animationId = null;
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible && !animationId) {
+                animationId = requestAnimationFrame(animate);
+            }
+        }, { threshold: 0.01 });
+        observer.observe(canvas);
         animate();
     }
 
