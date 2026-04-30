@@ -1,0 +1,92 @@
+[
+  {
+    "name_en": "Ahmed Mahmoud",
+    "name_ar": "أحمد محمود",
+    "role_en": "Business Owner",
+    "role_ar": "صاحب عمل",
+    "content_en": "Exceptional speed and accuracy in data processing. Highly recommended!",
+    "content_ar": "دقة وسرعة استثنائية في معالجة البيانات، والتقارير المالية كانت ممتازة. أنصح بالتعامل معه بشدة!",
+    "avatar": "https://i.pravatar.cc/150?u=ahmed"
+  },
+  {
+    "name_en": "Sarah Khalid",
+    "name_ar": "سارة خالد",
+    "role_en": "Data Lead",
+    "role_ar": "رئيسة قسم البيانات",
+    "content_en": "The dashboards provided gave us a completely new perspective on our sales data.",
+    "content_ar": "لوحات التحكم التي قدمها أعطتنا منظورًا جديدًا تمامًا لبيانات المبيعات لدينا، مما سهل علينا اتخاذ قرارات سريعة.",
+    "avatar": "https://i.pravatar.cc/150?u=sarah"
+  },
+  {
+    "name_en": "Omar Hassan",
+    "name_ar": "عمر حسن",
+    "role_en": "Operations Manager",
+    "role_ar": "مدير العمليات",
+    "content_en": "His expertise in bookkeeping and automated reporting saved our team countless hours. A true professional.",
+    "content_ar": "خبرته في إمساك الدفاتر المحاسبية وأتمتة التقارير وفرت لفريقنا ساعات طويلة من العمل اليدوي. شخص محترف جداً.",
+    "avatar": "https://i.pravatar.cc/150?u=omar"
+  },
+  {
+    "name_en": "Mahmoud Ezzat",
+    "name_ar": "محمود عزت",
+    "role_en": "Financial Director",
+    "role_ar": "مدير مالي",
+    "content_en": "Mohamed transformed our raw data into comprehensive financial dashboards. His attention to detail is unmatched.",
+    "content_ar": "قام محمد بتحويل بياناتنا الخام إلى لوحات تحكم مالية شاملة وواضحة جداً. اهتمامه بالتفاصيل لا يعلى عليه.",
+    "avatar": "https://i.pravatar.cc/150?u=mahmoud"
+  },
+  {
+    "name_en": "Tariq Al-Farsi",
+    "name_ar": "طارق الفارسي",
+    "role_en": "Sales Manager",
+    "role_ar": "مدير مبيعات",
+    "content_en": "The sales margin analysis he provided helped us increase our revenue by 15% in one quarter.",
+    "content_ar": "تحليل هوامش المبيعات الذي قدمه ساعدنا على زيادة إيراداتنا بنسبة ١٥٪ في ربع واحد.",
+    "avatar": "https://i.pravatar.cc/150?u=tariq"
+  },
+  {
+    "name_en": "Nour Al-Din",
+    "name_ar": "نور الدين",
+    "role_en": "Startup Founder",
+    "role_ar": "مؤسس شركة ناشئة",
+    "content_en": "Excellent communication and deep understanding of business requirements. Delivered precisely what we needed.",
+    "content_ar": "تواصل ممتاز وفهم عميق لمتطلبات العمل. قدم بالضبط ما كنا نحتاجه لتطوير استراتيجيتنا.",
+    "avatar": "https://i.pravatar.cc/150?u=nour"
+  },
+  {
+    "name_en": "Mustafa Kamal",
+    "name_ar": "مصطفى كمال",
+    "role_en": "HR Director",
+    "role_ar": "مدير الموارد البشرية",
+    "content_en": "His HR analytics dashboards allowed us to track employee performance and turnover effectively.",
+    "content_ar": "لوحات تحليلات الموارد البشرية سمحت لنا بتتبع أداء الموظفين ومعدلات الدوران الوظيفي بشكل فعال جداً.",
+    "avatar": "https://i.pravatar.cc/150?u=mustafa"
+  },
+  {
+    "name_en": "Youssef Ibrahim",
+    "name_ar": "يوسف إبراهيم",
+    "role_en": "E-Commerce Manager",
+    "role_ar": "مدير تجارة إلكترونية",
+    "content_en": "Helped us identify our most profitable customer segments through rigorous data analysis.",
+    "content_ar": "ساعدنا في تحديد شرائح العملاء الأكثر ربحية من خلال تحليل دقيق وصارم لبيانات المتجر.",
+    "avatar": "https://i.pravatar.cc/150?u=youssef"
+  },
+  {
+    "name_en": "Salma Yassin",
+    "name_ar": "سلمى ياسين",
+    "role_en": "Marketing Analyst",
+    "role_ar": "محللة تسويق",
+    "content_en": "Mohamed's ability to clean and process messy data into actionable insights is truly impressive.",
+    "content_ar": "قدرة محمد على تنظيف ومعالجة البيانات العشوائية وتحويلها إلى رؤى قابلة للتنفيذ مبهرة حقاً.",
+    "avatar": "https://i.pravatar.cc/150?u=salma"
+  },
+  {
+    "name_en": "Khaled Zaki",
+    "name_ar": "خالد زكي",
+    "role_en": "Supply Chain Head",
+    "role_ar": "رئيس سلاسل الإمداد",
+    "content_en": "By automating our inventory reporting, he eliminated human error and gave us real-time visibility.",
+    "content_ar": "من خلال أتمتة تقارير المخزون، قضى على الأخطاء البشرية وأعطانا رؤية واضحة ومباشرة للمخازن.",
+    "avatar": "https://i.pravatar.cc/150?u=khaled"
+  }
+]
