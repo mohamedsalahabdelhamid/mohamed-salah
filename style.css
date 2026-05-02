@@ -88,11 +88,6 @@ body {
     background-attachment: fixed;
 }
 
-@media print {
-    body { display: none !important; }
-}
-
-
 html.light body {
     background-image: none;
 }

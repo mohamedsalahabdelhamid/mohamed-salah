@@ -1,80 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── ANTI-COPY & PROTECTION DETERRENTS (Deter common copy methods) ──
-    const enforceProtection = () => {
-        document.body.style.userSelect = 'none';
-        document.body.style.webkitUserSelect = 'none';
-        document.body.style.msUserSelect = 'none';
-        document.body.style.mozUserSelect = 'none';
-    };
-
-    // Constant enforcement against "Enable Copy" extensions
-    const observer = new MutationObserver(() => {
-        if (document.body.style.userSelect !== 'none') enforceProtection();
-    });
-    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
-    enforceProtection();
-
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    
-    document.addEventListener('dragstart', event => {
-        if (event.target.tagName === 'IMG') event.preventDefault();
-    });
-
-    document.addEventListener('keydown', event => {
-        // Disable common shortcuts
-        if (event.ctrlKey && (['u', 's', 'a', 'p', 'c', 'x'].includes(event.key.toLowerCase()))) {
-            event.preventDefault();
-            return false;
-        }
-        // Disable F12 and Inspect shortcuts
-        if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && (['i', 'j', 'c'].includes(event.key.toLowerCase())))) {
-            event.preventDefault();
-            return false;
-        }
-    });
-
-    // Aggressive anti-debugging (detects if DevTools is open and breaks)
-    const blockDevTools = () => {
-        const emitDebugger = () => {
-            (function() {
-                (function a() {
-                    (function b(i) {
-                        if (("" + i / i).length !== 1 || i % 20 === 0) {
-                            (function() {}).constructor("debugger")();
-                        } else {
-                            debugger;
-                        }
-                        b(++i);
-                    })(0);
-                })();
-            })();
-        };
-
-        setInterval(() => {
-            const startTime = performance.now();
-            debugger; 
-            if (performance.now() - startTime > 100) {
-                // DevTools is open - Trigger the infinite debugger loop
-                emitDebugger();
-            }
-        }, 500);
-
-        // Detect Console opening via toString trick
-        const devtools = { isOpen: false };
-        const element = new Image();
-        Object.defineProperty(element, 'id', {
-            get: function() {
-                devtools.isOpen = true;
-                window.location.reload(); // Hard reset if they try to inspect
-            }
-        });
-        console.log(element);
-    };
-    blockDevTools(); 
-
-
-
     // ── XSS-safe HTML Escape Helper ────────────────────────
     function escapeHTML(str) {
         if (!str) return '';
@@ -2383,14 +2308,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         window.addEventListener('resize', handleResize);
-        
-        // Debugger Safety Loop
-        setInterval(() => {
-            if (window.outerWidth - window.innerWidth > 200 || window.outerHeight - window.innerHeight > 200) {
-                console.clear();
-            }
-        }, 1000);
-
         resizeCanvas();
         animate();
     }
