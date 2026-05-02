@@ -177,6 +177,21 @@ document.addEventListener('DOMContentLoaded', () => {
             thumbnail: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1000",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/pos-system-management-Project"
+        },
+        {
+            id: 15,
+            title_en: "Interactive Personal Portfolio",
+            title_ar: "معرض الأعمال الشخصي التفاعلي",
+            category: "Web Development",
+            desc_en: "A professional, responsive portfolio website featuring dynamic project rendering and multi-language support.",
+            desc_ar: "موقع ويب احترافي ومتجاوب لعرض مشاريعي بأسلوب ديناميكي مع دعم كامل لتعدد اللغات.",
+            details_en: "Developed using HTML, CSS, and vanilla JavaScript. Features include an automated translation system, dynamic project filtering, infinite testimonial marquee, and a contact system. Designed with modern UI/UX principles like glassmorphism and smooth animations.",
+            details_ar: "تم تطويره باستخدام HTML و CSS و JavaScript. يتضمن نظام ترجمة آلي، تصفية ديناميكية للمشاريع، شريط آراء لانهائي، ونظام تواصل متكامل. صُمم بمبادئ UI/UX حديثة مثل المؤثرات الزجاجية والرسوم المتحركة السلسة.",
+            enhancements_en: "Integrate a headless CMS for content management and add a dark/light mode toggle.",
+            enhancements_ar: "دمج نظام إدارة محتوى (CMS) وأتمتة تحديث البيانات مع إضافة ميزة التبديل بين الوضع المظلم والمضيء.",
+            thumbnail: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=1000",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/mohamed-salah"
         }
     ];
 
@@ -368,6 +383,60 @@ document.addEventListener('DOMContentLoaded', () => {
             tasks_ar: [
                 "إدارة دورة حياة المستندات لعملاء دوليين: المسح، الرقابة، والبيانات.",
                 "تحقيق نجاح 100% في التدقيق مع حماية كاملة لسرية البيانات."
+            ]
+        }
+    ];
+
+    const volunteering = [
+        {
+            role_en: "Youth Startup Mentor",
+            role_ar: "موجه ومساعد لمشاريع الشباب الناشئة",
+            company_en: "Homat Al Watan Party | Egypt",
+            company_ar: "حزب حماة الوطن | مصر",
+            date_en: "Oct 2024 - Dec 2024",
+            date_ar: "أكتوبر 2024 - ديسمبر 2024",
+            tasks_en: [
+                "Training and assisting youth in developing startups.",
+                "Providing market data analysis consulting.",
+                "Guiding youth to build sustainable business models."
+            ],
+            tasks_ar: [
+                "تدريب ومساعدة الشباب في تطوير المشاريع الناشئة.",
+                "تقديم استشارات حول تحليل بيانات السوق.",
+                "توجيه الشباب لبناء نماذج أعمال مستدامة."
+            ]
+        },
+
+        {
+            role_en: "Data Entry & Operations Volunteer",
+            role_ar: "متطوع تنظيم وإدخال بيانات",
+            company_en: "Resala Charity Organization | Cairo, Egypt",
+            company_ar: "جمعية رسالة للأعمال الخيرية | القاهرة، مصر",
+            date_en: "Nov 2023 - Jan 2024",
+            date_ar: "نوفمبر 2023 - يناير 2024",
+            tasks_en: [
+                "Organizing donor databases during the winter campaign.",
+                "Analyzing charity campaign data to increase efficiency."
+            ],
+            tasks_ar: [
+                "تنظيم قواعد بيانات المتبرعين خلال حملة الشتاء.",
+                "تحليل بيانات الحملات الخيرية لزيادة الكفاءة."
+            ]
+        },
+        {
+            role_en: "Logistics & Packing Volunteer",
+            role_ar: "متطوع لوجستيات وتعبئة",
+            company_en: "Egyptian Food Bank | Cairo, Egypt",
+            company_ar: "بنك الطعام المصري | القاهرة، مصر",
+            date_en: "Mar 2023 - Apr 2023",
+            date_ar: "مارس 2023 - أبريل 2023",
+            tasks_en: [
+                "Contributing to organizing and optimizing packing lines for Ramadan campaign.",
+                "Tracking distribution data to reach beneficiaries faster."
+            ],
+            tasks_ar: [
+                "المساهمة في تنظيم وتحسين خطوط التعبئة لحملة إفطار صائم.",
+                "تتبع بيانات التوزيع للوصول للمستحقين بشكل أسرع."
             ]
         }
     ];
@@ -581,7 +650,7 @@ document.addEventListener('DOMContentLoaded', () => {
             avatar: "https://i.pravatar.cc/150?u=mahmoud"
         },
         {
-            name_en: "Tariq Saeed",
+            name_en: "Tarek Saeed",
             name_ar: "طارق سعيد",
             role_en: "Sales Manager",
             role_ar: "مدير مبيعات",
@@ -590,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
             avatar: "https://i.pravatar.cc/150?u=tariq"
         },
         {
-            name_en: "Nour El-Din Mohamed",
+            name_en: "Nour El Din Mohamed",
             name_ar: "نور الدين محمد",
             role_en: "Startup Founder",
             role_ar: "مؤسس شركة ناشئة",
@@ -774,10 +843,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const EXP_PER_PAGE = 3;
     const SKILLS_PER_PAGE = 3;
     const CERTS_PER_PAGE = 3;
+    const VOLUNTEERING_PER_PAGE = 3;
 
     let currentProjectsPage = 1;
     let currentServicesPage = 1;
     let currentExpPage = 1;
+    let currentVolunteeringPage = 1;
     let currentSkillsPage = 1;
     let currentCertsPage = 1;
     let currentTestimonialsPage = 1;
@@ -811,6 +882,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectsContainer = document.getElementById('projects-container');
     const certsContainer = document.getElementById('certs-container');
     const expContainer = document.getElementById('experience-container');
+    const volunteeringContainer = document.getElementById('volunteering-container');
     const servicesContainer = document.getElementById('services-container');
     const servicesFilters = document.getElementById('services-filters');
 
@@ -1076,8 +1148,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prevBtn) prevBtn.style.display = 'none';
         if (nextBtn) nextBtn.style.display = 'none';
 
-        // Duplicate content for seamless loop
-        const originalHTML = track.innerHTML;
+        // Duplicate content for a seamless loop (2 sets) - Trimmed to avoid whitespace gaps
+        const originalHTML = track.innerHTML.trim();
         track.innerHTML = originalHTML + originalHTML;
 
         // Calculate animation duration based on actual width
@@ -1087,11 +1159,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const trackWidth = track.scrollWidth / 2;
             if (trackWidth <= 0) return;
 
-            const pixelsPerSecond = 220; // Increased scrolling speed
-            const durationSeconds = Math.max(8, Math.round(trackWidth / pixelsPerSecond));
+            const pixelsPerSecond = 75; // Very slow and elegant speed
+            const durationSeconds = trackWidth / pixelsPerSecond;
             
             track.style.animation = 'none';
             void track.offsetHeight; // Force reflow
+            
+            // Mathematically perfect loop: translateX(-50%) maps Set 2 exactly to Set 1's start
             track.style.animation = `scroll-left ${durationSeconds}s linear infinite`;
         }
 
@@ -1300,6 +1374,44 @@ document.addEventListener('DOMContentLoaded', () => {
             currentExpPage = page;
             renderExperience(lang);
             document.getElementById('experience').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    function renderVolunteering(lang) {
+        if (!volunteeringContainer) return;
+        volunteeringContainer.innerHTML = '';
+
+        const totalItems = volunteering.length;
+        const startIndex = (currentVolunteeringPage - 1) * VOLUNTEERING_PER_PAGE;
+        const pagedVolunteering = volunteering.slice(startIndex, startIndex + VOLUNTEERING_PER_PAGE);
+
+        pagedVolunteering.forEach(vol => {
+            const role = lang === 'ar' ? vol.role_ar : vol.role_en;
+            const company = lang === 'ar' ? vol.company_ar : vol.company_en;
+            const date = lang === 'ar' ? vol.date_ar : vol.date_en;
+            const tasks = lang === 'ar' ? vol.tasks_ar : vol.tasks_en;
+
+            const taskListHTML = tasks.map(t => `<li>${t}</li>`).join('');
+
+            const volHTML = `
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <div class="exp-date">${date}</div>
+                        <h3 class="exp-role">${role}</h3>
+                        <h4 class="exp-company">${company}</h4>
+                    </div>
+                    <ul class="exp-tasks">
+                        ${taskListHTML}
+                    </ul>
+                </div>
+            `;
+            volunteeringContainer.insertAdjacentHTML('beforeend', volHTML);
+        });
+
+        renderPaginationControls('volunteering-pagination', totalItems, VOLUNTEERING_PER_PAGE, currentVolunteeringPage, (page) => {
+            currentVolunteeringPage = page;
+            renderVolunteering(lang);
+            document.getElementById('volunteering').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     }
 
@@ -1593,6 +1705,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderSafe(window.renderServices, 'Services');
             renderSafe(window.renderCertifications, 'Certifications');
             renderSafe(window.renderExperience, 'Experience');
+            renderSafe(window.renderVolunteering, 'Volunteering');
             renderSafe(window.renderSkills, 'Skills');
             renderSafe(window.renderTestimonials, 'Testimonials');
 
@@ -2360,6 +2473,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.stroke();
             }
 
+
+
             for (const [key, opacity] of squares.entries()) {
                 if (opacity <= 0) {
                     squares.delete(key);
@@ -2570,6 +2685,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.renderServices = renderServices;
     window.renderCertifications = renderCertifications;
     window.renderExperience = renderExperience;
+    window.renderVolunteering = renderVolunteering;
     window.renderSkills = renderSkills;
     window.renderTestimonials = renderTestimonials;
     window.applyTranslation = applyTranslation;

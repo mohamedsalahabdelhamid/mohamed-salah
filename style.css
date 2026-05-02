@@ -1812,7 +1812,7 @@ footer {
     }
 
     .hero-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         text-align: center;
         gap: 3rem;
         padding-top: 2rem;
@@ -2333,18 +2333,21 @@ body.dir-rtl .summary-item {
 
 .slider-track {
     display: flex;
-    gap: 1.5rem;
+    gap: 0; /* Use consistent margins on slides instead of gap for marquee stability */
+    padding: 0;
+    width: max-content;
     will-change: transform;
 }
 
 @keyframes scroll-left {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
 }
 
 .testimonial-slide {
     min-width: 340px;
     max-width: 340px;
+    margin-inline-end: 1.5rem; /* Ensure every slide has the same trailing space */
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 18px;
@@ -2362,17 +2365,7 @@ body.dir-rtl .summary-item {
     position: relative;
 }
 
-.testimonial-content p::before {
-    content: '"';
-    font-size: 3rem;
-    color: var(--accent-color);
-    opacity: 0.3;
-    position: absolute;
-    top: -1rem;
-    left: -0.5rem;
-    font-family: Georgia, serif;
-    line-height: 1;
-}
+/* Removed quotation mark icon */
 
 .testimonial-author {
     border-top: 1px solid var(--card-border);
