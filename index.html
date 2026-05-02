@@ -5,21 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Salah | Senior Data Analyst & BI Specialist</title>
-    <!-- Preconnect for performance -->
+    <!-- Modern Fonts: preconnect + swap for speed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-    <!-- Modern Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="dns-prefetch" href="https://i.pravatar.cc">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <!-- Google Fonts: async load to eliminate render-blocking -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"></noscript>
+    <!-- FontAwesome: async load to eliminate render-blocking -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <!-- Favicon -->
     <link rel="icon" type="image/webp" href="1767434721347.webp">
     <link rel="stylesheet" href="style.css?v=4.0">
-    <link rel="stylesheet" href="chatbot.css?v=3.0">
+    <!-- Chatbot CSS: deferred as non-critical -->
+    <link rel="preload" as="style" href="chatbot.css?v=3.0" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="chatbot.css?v=3.0"></noscript>
 
     <!-- SEO & Social Media Previews -->
     <meta name="description"
@@ -28,6 +32,9 @@
     <meta property="og:description" content="Explore interactive dashboards, ETL pipelines, and AI solutions.">
     <meta property="og:image" content="https://mohamedsalahabdelhamid.github.io/my-portfolio-main/profile-optimized.jpg">
     <meta property="og:url" content="https://mohamedsalahabdelhamid.github.io/my-portfolio-main/">
+    <meta name="theme-color" content="#090a0f">
+    <!-- Critical: Preload the LCP hero image to improve LCP score -->
+    <link rel="preload" as="image" href="1767434721347.webp" fetchpriority="high">
 </head>
 
 <body class="dir-ltr">
@@ -135,7 +142,7 @@
         </div>
         <div class="hero-image">
             <div class="image-wrapper competition-grade">
-                <img src="1767434721347.webp" alt="Mohamed Salah" class="profile-img" loading="lazy">
+                <img src="1767434721347.webp" alt="Mohamed Salah - Data Analyst" class="profile-img" width="450" height="450" fetchpriority="high" decoding="async">
                 <div class="image-overlay-glow"></div>
             </div>
 
@@ -530,12 +537,11 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- EmailJS for real form submissions -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="config.js?v=3.0"></script>
-    <script src="script.js?v=4.0"></script>
-    <script src="chatbot.js?v=3.1"></script>
+    <!-- Scripts: all deferred to eliminate render-blocking -->
+    <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script defer src="config.js?v=3.0"></script>
+    <script defer src="script.js?v=4.0"></script>
+    <script defer src="chatbot.js?v=3.1"></script>
 </body>
 </html>

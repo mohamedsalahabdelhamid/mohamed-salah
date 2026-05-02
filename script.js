@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "تحليل كفاءة العمليات ومحركات الإيرادات لسلسلة متاجر بيتزا. يتضمن تحليل ساعات الذروة ومقاييس تحسين تكلفة المكونات.",
             enhancements_en: "Implement inventory tracking integration and delivery route optimization analysis.",
             enhancements_ar: "تنفيذ تكامل تتبع المخزون وتحليل تحسين مسار التوصيل.",
-            thumbnail: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/Pizza-Sales-Dashboard"
         },
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "تحليل استكشافي مفصل لمجموعة بيانات Superstore من Kaggle لتحديد الفئات والمناطق الخاسرة. تم استخدام بايثون لتنظيف البيانات وTableau للتصور النهائي.",
             enhancements_en: "Automate report generation using Python scripts and integrate customer sentiment analysis.",
             enhancements_ar: "أتمتة إنشاء التقارير باستخدام سكربتات بايثون ودمج تحليل مشاعر العملاء.",
-            thumbnail: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/Superstore-Performance-View"
         },
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "دراسة مقارنة لاتجاهات سوق الحواسيب المحمولة العالمية. يحلل الارتباط بين مواصفات الرام/التخزين ونقاط أسعار السوق.",
             enhancements_en: "Implement a price prediction tool based on hardware specifications.",
             enhancements_ar: "تنفيذ أداة للتنبؤ بالأسعار بناءً على مواصفات العتاد.",
-            thumbnail: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/Laptop-Market-Analysis-Dashboard"
         },
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "تحديد الدوافع الرئيسية لتراجع العملاء في صناعة الاتصالات باستخدام الاختبارات الإحصائية وتحليل أهمية الميزات.",
             enhancements_en: "Build a full predictive pipeline using XGBoost and deploy as a web app.",
             enhancements_ar: "بناء مسار تنبؤي كامل باستخدام XGBoost ونشره كتطبيق ويب.",
-            thumbnail: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/EDA-Telecom-Churn-Prediction"
         },
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "تحليل عميق لمجموعات بيانات حوادث المرور، مع التركيز على الظروف الجوية، أنواع الطرق، والأنماط الزمنية لتحسين التخطيط للسلامة الحضرية.",
             enhancements_en: "Integrate Real-time alerting for high-risk zones and ML-based severity prediction.",
             enhancements_ar: "دمج التنبيه الفوري للمناطق عالية الخطورة والتنبؤ بخطورة الحوادث باستخدام تعلم الآلة.",
-            thumbnail: "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/EDA_Road_Accident"
         },
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "تطوير لوحات تحكم مؤتمتة تتزامن مع قواعد بيانات CRM لمراقبة معدلات التراجع، سرعة التحويل، والقيمة الدائمة للعميل (CLV).",
             enhancements_en: "Predictive churn modeling and customer segmentation using clustering algorithms.",
             enhancements_ar: "نمذجة تراجع العملاء التنبؤية وتقسيم العملاء باستخدام خوارزميات التجميع.",
-            thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/CRM-Business-Intelligence-Project"
         },
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "مسار عمل تعلم آلي متكامل على 13 ألف سجل لياقة. يتضمن تحليلاً استكشافياً وهندسة ميزات، حيث حقق نموذج XGBoost دقة 89٪ في التصنيف الثنائي.",
             enhancements_en: "Deploy model as an interactive web API for real-time fitness evaluation.",
             enhancements_ar: "نشر النموذج كتطبيق ويب تفاعلي لتقييم اللياقة في الوقت الفعلي.",
-            thumbnail: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/Body-Performance-Analytics"
         },
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "تقييم فني لمجموعة بيانات لوجستية لمدة 21 شهرًا. ينفذ مخطط SQL منظماً ونموذج Random Forest للتنبؤ بتأخير الشحنات مع رؤى تجارية قابلة للتنفيذ.",
             enhancements_en: "Integration with real-time GPS tracking APIs and automated route re-optimization.",
             enhancements_ar: "التكامل مع واجهات برمجة تطبيقات تتبع GPS في الوقت الفعلي وإعادة تحسين المسار تلقائيًا.",
-            thumbnail: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/Logistics-Supply-Chain-Analysis-Delay-Prediction"
         },
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "لوحة تحكم تفاعلية ببايثون لمراقبة مؤشرات اللوجستيات. تتبع أحجام الشحن وأوقات التسليم وكفاءة المسارات مع تنبيهات آلية.",
             enhancements_en: "Integrate live GPS API and predictive delay alerts.",
             enhancements_ar: "دمج GPS مباشر وتنبيهات التأخير التنبؤية.",
-            thumbnail: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/Logistics_Dashboard"
         },
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "حل إدارة نقاط بيع شامل يتضمن التحكم الفوري في المخزون والتقارير الآلية والمطابقات المالية.",
             enhancements_en: "Add predictive reorder alerts and multi-branch consolidation.",
             enhancements_ar: "إضافة تنبيهات إعادة الطلب التنبؤية وتوحيد الفروع.",
-            thumbnail: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/pos-system-management-Project"
         },
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             details_ar: "تم تطويره باستخدام HTML و CSS و JavaScript. يتضمن نظام ترجمة آلي، تصفية ديناميكية للمشاريع، شريط آراء لانهائي، ونظام تواصل متكامل. صُمم بمبادئ UI/UX حديثة مثل المؤثرات الزجاجية والرسوم المتحركة السلسة.",
             enhancements_en: "Integrate a headless CMS for content management and add a dark/light mode toggle.",
             enhancements_ar: "دمج نظام إدارة محتوى (CMS) وأتمتة تحديث البيانات مع إضافة ميزة التبديل بين الوضع المظلم والمضيء.",
-            thumbnail: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=1000",
+            thumbnail: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/mohamed-salah"
         }
@@ -929,7 +929,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardHTML = `
                 <div class="project-card">
                     <div class="project-media">
-                        <img src="${thumbSrc}" alt="${title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71'">
+                        <img src="${thumbSrc}" alt="${title}" loading="lazy" decoding="async" width="400" height="220" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=70&w=600'">
                         ${hasVideo ? `
                         <div class="play-overlay" data-video="${project.videoSrc}" data-title="${title}">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
@@ -1844,7 +1844,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             mouseMoveRAF = null;
         });
-    });
+    }, { passive: true });
 
     // ── Typing Effect ──────────────────────────────────
     let titleTypingTimer;
@@ -2695,37 +2695,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // Final Initialization Sequence
     initTestimonials();
     initCustomCursor();
-    // فحص الموبايل والحركة المخففة قبل تشغيل Letter Glitch
-    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobileDevice = window.innerWidth < 768;
-    if (!isReducedMotion && !isMobileDevice) {
-        initLetterGlitch('letter-glitch-container', {
-            glitchColors: ['#10b981', '#34d399', '#6ee7b7'],
-            glitchSpeed: 50,
-            centerVignette: false,
-            outerVignette: true,
-            smooth: true
-        });
-    }
-
-    initNeuralBackground();
     initTypingEffect();
-    initParallax();
     updateDynamicStats();
 
-    // تأخير تشغيل التأثيرات الثقيلة لتجنّب تعطيل الرسم الأول
-    setTimeout(() => {
+    // Initial translation and render (critical - runs immediately)
+    applyTranslation(currentLang);
+
+    // Defer ALL heavy canvas/animation effects to avoid blocking the main thread
+    // requestIdleCallback runs when the browser is idle, preventing TBT spike
+    const runWhenIdle = window.requestIdleCallback
+        ? (fn) => window.requestIdleCallback(fn, { timeout: 2000 })
+        : (fn) => setTimeout(fn, 200);
+
+    runWhenIdle(() => {
+        const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobileDevice = window.innerWidth < 768;
+
+        // Letter glitch - visually rich but non-critical
+        if (!isReducedMotion && !isMobileDevice) {
+            initLetterGlitch('letter-glitch-container', {
+                glitchColors: ['#10b981', '#34d399', '#6ee7b7'],
+                glitchSpeed: 50,
+                centerVignette: false,
+                outerVignette: true,
+                smooth: true
+            });
+        }
+
+        // Neural background (canvas animation)
+        initNeuralBackground();
+        initParallax();
+
+        // Section-specific canvas backgrounds
         if (!isMobileDevice) {
             initSquaresBackground('skills');
             initHyperspeedBackground('projects');
             initLiquidFlowBackground('contact');
         }
+
+        // Interaction effects
         initTiltEffect();
         initMagneticElements();
-    }, 900);
-
-    // Initial translation and render
-    applyTranslation(currentLang);
+    });
 });
 
 // ─── Scroll Progress Bar (Optimized) ──────────────────────────
