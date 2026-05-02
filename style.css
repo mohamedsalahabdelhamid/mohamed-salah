@@ -662,6 +662,76 @@ html.light .navbar.scrolled {
     display: flex;
     list-style: none;
     gap: 2rem;
+    /* Ensures no overflow outside navbar on desktop */
+}
+
+/* === MOBILE NAV FIX: Hide links on small screens === */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: min(320px, 85vw);
+        height: 100vh;
+        background: rgba(9, 10, 15, 0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition: right 0.45s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+        z-index: 999;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+        /* Invisible when off-screen */
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    html.light .nav-links {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: -10px 0 40px rgba(13, 148, 136, 0.1);
+    }
+
+    .nav-links.active {
+        right: 0;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    body.dir-rtl .nav-links {
+        right: auto;
+        left: -100%;
+        flex-direction: column !important;
+    }
+
+    body.dir-rtl .nav-links.active {
+        left: 0;
+        right: auto;
+    }
+
+    .nav-links a {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-links.active a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Staggered entry for menu links */
+    .nav-links.active li:nth-child(1) a { transition-delay: 0.08s; }
+    .nav-links.active li:nth-child(2) a { transition-delay: 0.16s; }
+    .nav-links.active li:nth-child(3) a { transition-delay: 0.24s; }
+    .nav-links.active li:nth-child(4) a { transition-delay: 0.32s; }
+    .nav-links.active li:nth-child(5) a { transition-delay: 0.40s; }
+    .nav-links.active li:nth-child(6) a { transition-delay: 0.48s; }
+    .nav-links.active li:nth-child(7) a { transition-delay: 0.56s; }
 }
 
 .nav-links a {
@@ -1020,181 +1090,7 @@ html.light .hero-desc {
     fill: currentColor;
 }
 
-.hero-content {
-    flex: 0.9;
-    position: relative;
-    z-index: 10;
-    animation: slideInLeft 0.9s ease-out forwards;
-    /* Added subtle text shadow for global legibility */
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
-}
-
-body.dir-rtl .hero-content {
-    animation: slideInRight 0.9s ease-out forwards;
-}
-
-.greeting {
-    font-size: 1.1rem;
-    color: var(--accent-color);
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.greeting::before {
-    content: '';
-    width: 30px;
-    height: 2px;
-    background: var(--accent-color);
-    display: inline-block;
-}
-
-body.dir-rtl .greeting::before {
-    display: none;
-}
-
-body.dir-rtl .greeting::after {
-    content: '';
-    width: 30px;
-    height: 2px;
-    background: var(--accent-color);
-    display: inline-block;
-}
-
-.name {
-    transition: letter-spacing 0.3s ease;
-    font-size: 4.2rem;
-    font-weight: 800;
-    line-height: 1.05;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2), 0 2px 10px rgba(0, 0, 0, 0.8);
-    letter-spacing: -1px;
-    margin-bottom: 0.6rem;
-    position: relative;
-    z-index: 1;
-}
-
-body.dir-rtl .name {
-    letter-spacing: 0;
-}
-
-.name br {
-    display: block;
-    content: "";
-    margin-top: -10px;
-}
-
-.title {
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    min-height: 1.2em;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.hero-desc {
-    font-size: 1.2rem;
-    color: var(--text-primary); /* Brighter for better contrast */
-    margin-bottom: 1.5rem;
-    max-width: 650px;
-    line-height: 1.8;
-    /* Added glassmorphism effect for legibility */
-    background: rgba(9, 10, 15, 0.3);
-    padding: 1.2rem;
-    border-radius: 12px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-/* ── Action Area Coordination ───────────────────── */
-.hero-action-area {
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
-    margin-top: 1.5rem;
-}
-
-.hero-btns {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.hero-cv-btn {
-    display: none;
-    /* Removed as it's now inside .hero-btns */
-}
-
-@media (max-width: 1024px) {
-    .hero-cv-btn {
-        justify-content: center;
-    }
-}
-
-.btn {
-    padding: 12px 28px;
-    border-radius: 8px;
-    font-weight: 800;
-    text-decoration: none;
-    transition: var(--transition);
-    font-size: 0.9rem; /* Slightly smaller + spaced = premium */
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.btn-primary {
-    background: var(--gradient-primary);
-    color: #000000 !important; /* Pure black for maximum contrast on gold */
-    box-shadow: 0 4px 18px var(--accent-glow);
-    border: none;
-    letter-spacing: 0.5px;
-    font-weight: 800;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.35);
-    filter: brightness(1.15);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--text-primary);
-    border: 1px solid var(--card-border);
-}
-
-.btn-secondary:hover {
-    background: rgba(212, 175, 55, 0.05);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
-}
-
-/* CV Button - always lit, stronger hover */
-.btn-cv {
-    background: rgba(212, 175, 55, 0.10);
-    color: var(--accent-color);
-    border: 1.5px solid var(--accent-color);
-    font-size: 0.95rem;
-    box-shadow: 0 0 14px var(--accent-glow);
-}
+/* ── Removed duplicate hero-content, greeting, name, title, hero-desc, hero-action-area, btn blocks (already defined above) ── */
 
 .btn-cv:hover {
     background: var(--accent-color);
@@ -1937,64 +1833,10 @@ footer {
         justify-content: center;
     }
 
-    /* Mobile Menu Styles */
+    /* Show hamburger on mobile */
     .hamburger {
         display: flex;
     }
-
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        height: 100vh;
-        background: rgba(9, 10, 15, 0.99);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-        transition: 0.6s cubic-bezier(0.77,0.2,0.05,1.0);
-        z-index: 999;
-        backdrop-filter: blur(20px);
-    }
-
-    html.light .nav-links {
-        background: rgba(255, 255, 255, 0.99);
-    }
-
-    .nav-links.active {
-        right: 0;
-    }
-
-    body.dir-rtl .nav-links {
-        right: auto;
-        left: -100%;
-    }
-
-    body.dir-rtl .nav-links.active {
-        left: 0;
-    }
-
-    .nav-links a {
-        font-size: 1.4rem;
-        font-weight: 700;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: 0.4s ease;
-    }
-
-    .nav-links.active a {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Staggered entry for menu links */
-    .nav-links.active li:nth-child(1) a { transition-delay: 0.1s; }
-    .nav-links.active li:nth-child(2) a { transition-delay: 0.2s; }
-    .nav-links.active li:nth-child(3) a { transition-delay: 0.3s; }
-    .nav-links.active li:nth-child(4) a { transition-delay: 0.4s; }
-    .nav-links.active li:nth-child(5) a { transition-delay: 0.5s; }
-    .nav-links.active li:nth-child(6) a { transition-delay: 0.6s; }
 }
 
 /* ── Hero Stats HUD Grid ────────────────────────────────── */
@@ -2557,11 +2399,13 @@ body.dir-rtl .summary-item {
     }
     
     .title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
     .hero-stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 0.8rem;
     }
 
@@ -2581,10 +2425,19 @@ body.dir-rtl .summary-item {
         padding: 10px 20px;
         font-size: 0.85rem;
     }
-}
-    gap: 0.75rem;
-    justify-content: center;
-    margin-bottom: 2.5rem;
+
+    .contact-card {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    .contact-info h2 {
+        font-size: 2rem;
+    }
+
+    .hero {
+        padding: 130px 5% 60px;
+    }
 }
 
 /* ========================================================
@@ -2943,4 +2796,233 @@ html.light .name {
     filter: drop-shadow(0 0 15px rgba(13, 148, 136, 0.3));
 }
 
+/* ================================================================
+   TITLE OVERFLOW FIX — prevent long typing text from overflowing
+   ================================================================ */
+.title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+@media (max-width: 900px) {
+    .title {
+        font-size: 1.4rem;
+        white-space: normal;
+        overflow: visible;
+        word-break: break-word;
+    }
+}
+
+/* ================================================================
+   RTL (ARABIC) MOBILE FIXES
+   ================================================================ */
+body.dir-rtl .hero-btns {
+    justify-content: center;
+}
+
+body.dir-rtl .hero-stats-grid {
+    direction: rtl;
+}
+
+body.dir-rtl .stat-card::before {
+    left: auto;
+    right: 0;
+}
+
+body.dir-rtl .greeting {
+    justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+    body.dir-rtl .hero-content {
+        text-align: center;
+    }
+
+    body.dir-rtl .greeting {
+        justify-content: center;
+    }
+
+    body.dir-rtl .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    body.dir-rtl .hero-btns {
+        justify-content: center;
+    }
+
+    body.dir-rtl .social-links-hero {
+        justify-content: center;
+    }
+
+    /* Contact card RTL fix on mobile */
+    body.dir-rtl .contact-item:hover {
+        transform: translateX(0);
+    }
+}
+
+/* ================================================================
+   SOCIAL LINKS HERO — center on mobile
+   ================================================================ */
+@media (max-width: 768px) {
+    .social-links-hero {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-stats-grid {
+        margin: 1.5rem auto;
+        justify-items: center;
+    }
+
+    .hero-action-area {
+        align-items: center;
+    }
+
+    .section-header h2 {
+        font-size: 2.2rem;
+    }
+
+    /* Fix project cards on mobile */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Fix services grid on mobile */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Fix certifications grid on mobile */
+    .certs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Make experience cards full width */
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================================================
+   PERFORMANCE — reduce motion for users who prefer it
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .orb-1,
+    .orb-2,
+    .orb-3 {
+        animation: none;
+    }
+
+    #data-flow-canvas {
+        display: none;
+    }
+}
+
+/* ================================================================
+   LIGHT MODE HERO TEXT FIX
+   ================================================================ */
+html.light .hero-desc {
+    background: rgba(13, 148, 136, 0.05);
+    border: 1px solid rgba(13, 148, 136, 0.15);
+    text-shadow: none;
+    color: var(--text-primary);
+}
+
+html.light .title {
+    color: var(--text-secondary);
+    text-shadow: none;
+}
+
+/* ================================================================
+   HAMBURGER BUTTON — better tap target on mobile
+   ================================================================ */
+@media (max-width: 768px) {
+    .hamburger {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+    }
+
+    .control-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+}
+
+/* ================================================================
+   CONTACT CARD — fix light mode
+   ================================================================ */
+html.light .contact-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(13, 148, 136, 0.15);
+    box-shadow: 0 40px 100px rgba(13, 148, 136, 0.08);
+}
+
+html.light .contact-item {
+    background: rgba(13, 148, 136, 0.03);
+    border-color: rgba(13, 148, 136, 0.1);
+}
+
+html.light .contact-item:hover {
+    background: rgba(13, 148, 136, 0.07);
+    border-color: var(--accent-color);
+}
+
+html.light .icon-box {
+    border-color: rgba(13, 148, 136, 0.2);
+}
+
+/* ================================================================
+   PAGINATION — better mobile touch targets
+   ================================================================ */
+.page-btn {
+    min-width: 38px;
+    min-height: 38px;
+}
+
+@media (max-width: 480px) {
+    .pagination-wrapper {
+        gap: 0.4rem;
+    }
+
+    .page-btn {
+        min-width: 34px;
+        min-height: 34px;
+        font-size: 0.85rem;
+    }
+
+    .filter-btn {
+        padding: 6px 14px;
+        font-size: 0.82rem;
+    }
+}
+
+/* ================================================================
+   NAVBAR — ensure controls stay properly spaced on mobile
+   ================================================================ */
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 4%;
+    }
+
+    .controls-container {
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 1.6rem;
+    }
+}
 

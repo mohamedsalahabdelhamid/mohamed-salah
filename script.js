@@ -700,6 +700,9 @@ document.addEventListener('DOMContentLoaded', () => {
             filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
+            // Reset to page 1 on filter change
+            currentProjectsPage = 1;
+
             const lang = localStorage.getItem('lang') || 'en';
             renderProjects(lang);
         });
@@ -1637,6 +1640,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.classList.toggle('fa-times');
             }
         });
+
+        // Close mobile menu when a nav link is clicked
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    const icon = hamburger.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                }
+            });
+        });
     }
 
     // Smooth Scrolling for Nav Links (adjusted)
@@ -1722,8 +1739,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const lang = localStorage.getItem('lang') || 'en';
         
         const titlePhrases = lang === 'ar'
-            ? ['محلل بيانات وأخصائي ذكاء أعمال | مطور حلول ذكاء اصطناعي']
-            : ['Data Analyst & BI Specialist | AI Solutions Developer'];
+            ? [
+                'محلل بيانات',
+                'أخصائي ذكاء أعمال',
+                'مطور حلول ذكاء اصطناعي'
+              ]
+            : [
+                'Data Analyst',
+                'BI Specialist',
+                'AI Solutions Developer'
+              ];
             
         const descText = lang === 'ar'
             ? 'محلل بيانات أركز على تحقيق النتائج، بخبرة تزيد عن 3 سنوات في قطاعات متعددة. أطور حلول متكاملة لذكاء الأعمال، وأنظمة معالجة البيانات (ETL)، وأطر عمل لتحسين مؤشرات الأداء (KPIs) لدعم اتخاذ القرارات الإدارية بدقة.'
@@ -1731,6 +1756,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let titleIdx = 0, charIdx = 0, isDeleting = false;
         let isTypingDesc = false, descCharIdx = 0;
+        let descDone = false;
 
         function type() {
             if (!isTypingDesc) {
@@ -1745,35 +1771,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (!isDeleting && charIdx === current.length) {
-                    // Title done, move to description or wait
-                    isDeleting = true;
-                    // Only start description typing once on the first title, or just keep cycling title
-                    // The user asked for it to "keep typing", so I'll cycle title and keep desc typed.
-                    if (descCharIdx === 0) isTypingDesc = true; 
-                    typingTimer = setTimeout(type, 2000);
+                    // Title done — pause, then either type description or delete
+                    if (!descDone && titleIdx === 0) {
+                        // First time: type description
+                        isTypingDesc = true;
+                        typingTimer = setTimeout(type, 1500);
+                    } else {
+                        // Already typed desc — just wait then delete
+                        isDeleting = true;
+                        typingTimer = setTimeout(type, 2200);
+                    }
                     return;
                 }
                 
                 if (isDeleting && charIdx === 0) {
                     isDeleting = false;
                     titleIdx = (titleIdx + 1) % titlePhrases.length;
+                    typingTimer = setTimeout(type, 400);
+                    return;
                 }
-                typingTimer = setTimeout(type, isDeleting ? 15 : 30);
+                typingTimer = setTimeout(type, isDeleting ? 18 : 32);
             } else {
-                // Typing Description (One-time or occasional refresh)
-                descCharIdx += 3; // Type 3 characters at once for super speed
+                // Typing Description (One-time, fast)
+                descCharIdx += 4; // Type 4 characters at once
                 if (descCharIdx > descText.length) descCharIdx = descText.length;
                 descSpan.textContent = descText.substring(0, descCharIdx);
                 
                 if (descCharIdx === descText.length) {
-                    isTypingDesc = false; // Go back to cycling title
-                    typingTimer = setTimeout(type, 500);
+                    descDone = true;
+                    isTypingDesc = false;
+                    isDeleting = true; // Start deleting the title
+                    typingTimer = setTimeout(type, 2000);
                     return;
                 }
-                typingTimer = setTimeout(type, 5); // 5ms delay for extremely fast typing
+                typingTimer = setTimeout(type, 5);
             }
         }
-        
+
+
         // Reset spans
         titleSpan.textContent = '';
         descSpan.textContent = '';
