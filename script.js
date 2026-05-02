@@ -1857,14 +1857,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const titlePhrases = lang === 'ar'
             ? [
-                'محلل بيانات',
-                'أخصائي ذكاء أعمال',
-                'مطور حلول ذكاء اصطناعي'
+                'مهندس بيانات (Data Engineer)',
+                'أخصائي ذكاء أعمال (BI Specialist)'
             ]
             : [
-                'Data Analyst',
-                'BI Specialist',
-                'AI Solutions Developer'
+                'Data Engineer',
+                'Business Intelligence Specialist'
             ];
 
         let titleIdx = 0, charIdx = 0, isDeleting = false;
