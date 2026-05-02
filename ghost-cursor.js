@@ -15,14 +15,14 @@ class GhostCursor {
             bloomRadius: 1.0,
             bloomThreshold: 0.025,
             brightness: 1,
-            color: '#d4af37', // Gold color matching website identity
+            color: '#d4af37', 
             mixBlendMode: 'screen',
             edgeIntensity: 0,
             maxDevicePixelRatio: 0.5,
             targetPixels: null,
             fadeDelayMs: null,
             fadeDurationMs: null,
-            zIndex: 9999, // Layer on top of most elements
+            zIndex: 9999, 
             ...options
         };
 
@@ -55,7 +55,7 @@ class GhostCursor {
         this.renderer.setClearColor(0x000000, 0);
         this.renderer.domElement.style.pointerEvents = 'none';
         
-        // Ensure canvas covers container
+        
         this.renderer.domElement.style.display = 'block';
         this.renderer.domElement.style.width = '100%';
         this.renderer.domElement.style.height = '100%';
@@ -401,9 +401,9 @@ class GhostCursor {
     }
 }
 
-// Initialize on load
+
 window.addEventListener('DOMContentLoaded', () => {
-    // Determine the gold color based on mode or just use base gold
-    // Using a nice shiny gold color: #e6c25e
+    
+    
     new GhostCursor(document.body, { color: '#d4af37' });
 });

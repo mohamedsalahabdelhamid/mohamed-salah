@@ -1,6 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── XSS-safe HTML Escape Helper ────────────────────────
+    
+    const enforceProtection = () => {
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+        document.body.style.msUserSelect = 'none';
+        document.body.style.mozUserSelect = 'none';
+    };
+
+    
+    const observer = new MutationObserver(() => {
+        if (document.body.style.userSelect !== 'none') enforceProtection();
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    enforceProtection();
+
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    
+    document.addEventListener('dragstart', event => {
+        if (event.target.tagName === 'IMG') event.preventDefault();
+    });
+
+    document.addEventListener('keydown', event => {
+        
+        if (event.ctrlKey && (['u', 's', 'a', 'p', 'c', 'x'].includes(event.key.toLowerCase()))) {
+            event.preventDefault();
+            return false;
+        }
+        
+        if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && (['i', 'j', 'c'].includes(event.key.toLowerCase())))) {
+            event.preventDefault();
+            return false;
+        }
+    });
+
+    
+    const blockDevTools = () => {
+        try {
+            (function() {
+                (function a() {
+                    try {
+                        (function b(i) {
+                            if (("" + i / i).length !== 1 || i % 20 === 0) {
+                                (function() {}).constructor("debugger")();
+                            } else {
+                                debugger;
+                            }
+                            b(++i);
+                        })(0);
+                    } catch (e) {
+                        setTimeout(a, 500);
+                    }
+                })();
+            })();
+        } catch (e) {}
+    };
+    
+
+
+
+    
     function escapeHTML(str) {
         if (!str) return '';
         return String(str)
@@ -11,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/'/g, '&#039;');
     }
 
-    // ── DATA DEFINITIONS (MOVED TO TOP TO PREVENT REFERENCE ERRORS) ──
+    
     const projects = [
         {
             id: 1,
@@ -705,17 +764,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // ── INTERFACE FUNCTIONS ──
+    
     function updateDynamicStats() {
-        // startYear = start of data-analytics-focused career
+        
         const startYear = 2023;
         const currentYear = new Date().getFullYear();
-        const yearsExp = Math.max(currentYear - startYear, 3); // At least 3+
-        const projectCount = 30; // Set strictly to 30 as requested
+        const yearsExp = Math.max(currentYear - startYear, 3); 
+        const projectCount = 30; 
 
         const statsMap = {
-            'stat-years': yearsExp,        // e.g. 3+ (matches bio text)
-            'stat-projects': projectCount,    // actual project count
+            'stat-years': yearsExp,        
+            'stat-projects': projectCount,    
             'stat-reports': 40,
             'stat-hours': 10
         };
@@ -729,7 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateCounter(el) {
         const target = parseInt(el.getAttribute('data-target'));
         const suffix = el.getAttribute('data-suffix') || '';
-        const duration = 600; // Faster animation
+        const duration = 600; 
         const step = target / (duration / 16);
         let current = 0;
         const timer = setInterval(() => {
@@ -747,7 +806,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const statsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                updateDynamicStats(); // Update values before animation
+                updateDynamicStats(); 
                 entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
                 statsObserver.unobserve(entry.target);
             }
@@ -757,7 +816,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroStatsSection = document.querySelector('.hero-stats-grid');
     if (heroStatsSection) statsObserver.observe(heroStatsSection);
 
-    // ── Project Filter ─────────────────────────────────
+    
     function initProjectFilter() {
         const filterContainer = document.getElementById('project-filters');
         if (!filterContainer) return;
@@ -769,14 +828,14 @@ document.addEventListener('DOMContentLoaded', () => {
             filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Reset to page 1 on filter change
+            
             currentProjectsPage = 1;
 
             const lang = localStorage.getItem('lang') || 'en';
             renderProjects(lang);
         });
 
-        // Apply lang to filter buttons
+        
         const lang = localStorage.getItem('lang') || 'en';
         filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
             const val = btn.getAttribute(`data-${lang}`);
@@ -784,9 +843,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     initProjectFilter();
-    window.initProjectFilter = initProjectFilter; // expose for lang change
+    window.initProjectFilter = initProjectFilter; 
 
-    // Hide Loader
+    
 
     const loader = document.querySelector('.loader-wrapper');
     if (loader) {
@@ -798,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
     }
 
-    // Navbar Scroll Effect
+    
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -808,12 +867,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Theme Toggle
+    
     const themeBtn = document.getElementById('theme-toggle');
     const htmlEl = document.documentElement;
     const themeIcon = themeBtn.querySelector('i');
 
-    // Check saved theme
+    
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         htmlEl.classList.replace('dark', 'light');
@@ -832,12 +891,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Language Toggle
+    
     const langBtn = document.getElementById('lang-toggle');
     let currentLang = localStorage.getItem('lang') || 'en';
 
-    // ── DOM ELEMENTS AND INITIAL RENDERING ──
-    // ── PAGINATION STATE ──
+    
+    
     const PROJECTS_PER_PAGE = 3;
     const SERVICES_PER_PAGE = 3;
     const EXP_PER_PAGE = 3;
@@ -888,19 +947,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderProjects(lang) {
         if (!projectsContainer) return;
-        projectsContainer.innerHTML = ''; // Clear previous
+        projectsContainer.innerHTML = ''; 
 
         const activeFilter = document.getElementById('project-filters')?.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
 
-        // 1. Filter projects first
+        
         let filteredProjects = activeFilter === 'all'
             ? projects
             : projects.filter(p => p.category === activeFilter);
 
-        // 2. Sort by ID descending (Newest first)
+        
         filteredProjects = [...filteredProjects].sort((a, b) => b.id - a.id);
 
-        // 3. Handle empty state
+        
         if (filteredProjects.length === 0) {
             projectsContainer.innerHTML = `
                 <div class="empty-projects-state" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-secondary);">
@@ -913,12 +972,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 4. Pagination logic
+        
         const totalItems = filteredProjects.length;
         const startIndex = (currentProjectsPage - 1) * PROJECTS_PER_PAGE;
         const pagedProjects = filteredProjects.slice(startIndex, startIndex + PROJECTS_PER_PAGE);
 
-        // 5. Render paged projects
+        
         pagedProjects.forEach(project => {
             const thumbSrc = project.thumbnail ? project.thumbnail : 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80';
             const hasVideo = project.videoSrc !== null;
@@ -951,16 +1010,16 @@ document.addEventListener('DOMContentLoaded', () => {
             projectsContainer.insertAdjacentHTML('beforeend', cardHTML);
         });
 
-        // Render controls
+        
         renderPaginationControls('projects-pagination', totalItems, PROJECTS_PER_PAGE, currentProjectsPage, (page) => {
             currentProjectsPage = page;
             renderProjects(lang);
             document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        // Reattach Modal Events after rendering
+        
         attachModalEvents();
-        // Refresh card cache for mousemove glow effect
+        
         window.dispatchEvent(new Event('portfolioRender'));
     }
 
@@ -972,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ? services
             : services.filter(s => s.category === activeServiceFilter);
 
-        // Pagination
+        
         const totalItems = filteredServices.length;
         const startIndex = (currentServicesPage - 1) * SERVICES_PER_PAGE;
         const pagedServices = filteredServices.slice(startIndex, startIndex + SERVICES_PER_PAGE);
@@ -999,18 +1058,18 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPaginationControls('services-pagination', totalItems, SERVICES_PER_PAGE, currentServicesPage, (page) => {
             currentServicesPage = page;
             renderServices(lang);
-            // Scroll to services section top
+            
             document.getElementById('services').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        // Reattach Modal Events for services
+        
         attachModalEvents();
     }
 
-    // Services filter — track active filter in a variable to avoid DOM-read race conditions
+    
     let activeServiceFilter = 'all';
 
-    // Helper to decode HTML entities (like &amp; to &)
+    
     function decodeHTMLEntities(text) {
         const textArea = document.createElement('textarea');
         textArea.innerHTML = text;
@@ -1024,10 +1083,10 @@ document.addEventListener('DOMContentLoaded', () => {
             servicesFilters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Reset to page 1 on filter change
+            
             currentServicesPage = 1;
 
-            // Decode the filter attribute just in case '&' became '&amp;' in the DOM
+            
             let rawFilter = btn.getAttribute('data-filter') || 'all';
             activeServiceFilter = decodeHTMLEntities(rawFilter);
 
@@ -1040,7 +1099,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.getElementById('testimonials-grid');
         if (!grid) return;
 
-        // Try dynamic reviews via Proxy, fallback to local file
+        
         try {
             const cfg = window.PORTFOLIO_CONFIG || {};
             let fetchedReviews = [];
@@ -1060,7 +1119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Fallback to local file if proxy fails, is disabled, or returns empty
+            
             if (!Array.isArray(fetchedReviews) || fetchedReviews.length === 0) {
                 const response = await fetch('data/reviews.json?t=' + Date.now());
                 if (response.ok) {
@@ -1082,7 +1141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!testimonialsGrid) return;
         testimonialsGrid.innerHTML = '';
 
-        // Build a horizontal slider container
+        
         const sliderId = 'testimonials-slider';
         const sliderHTML = `
             <div class="testimonials-slider" id="${sliderId}">
@@ -1096,7 +1155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const track = document.getElementById(`${sliderId}-track`);
         if (!track) return;
 
-        // Render each testimonial as a slide
+        
         testimonials.forEach(t => {
             const name = lang === 'ar' ? (t.name_ar || t.name_en) : (t.name_en || t.name_ar);
             const role = lang === 'ar' ? (t.role_ar || t.role_en) : (t.role_en || t.role_ar);
@@ -1127,55 +1186,55 @@ document.addEventListener('DOMContentLoaded', () => {
             track.insertAdjacentHTML('beforeend', slideHTML);
         });
 
-        // Initialize marquee (TV-style continuous ticker)
+        
         setupTestimonialsMarquee(`#${sliderId}`);
 
-        // No traditional pagination for carousel; clear existing controls
+        
         const pagContainer = document.getElementById('testimonials-pagination');
         if (pagContainer) pagContainer.innerHTML = '';
     }
 
-    // Marquee helper: continuous TV-style ticker
+    
     function setupTestimonialsMarquee(selector) {
         const slider = document.querySelector(selector);
         if (!slider) return;
         const track = slider.querySelector('.slider-track');
         if (!track) return;
 
-        // Remove nav buttons for marquee
+        
         const prevBtn = slider.querySelector('.slider-nav.prev');
         const nextBtn = slider.querySelector('.slider-nav.next');
         if (prevBtn) prevBtn.style.display = 'none';
         if (nextBtn) nextBtn.style.display = 'none';
 
-        // Duplicate content 4 times for a safe seamless loop on all screen sizes
+        
         const originalHTML = track.innerHTML.trim();
         track.innerHTML = originalHTML + originalHTML + originalHTML + originalHTML;
 
-        // Calculate animation duration based on actual width
+        
         function updateAnimation() {
-            // Get the width of ONE set (total / 4)
+            
             const trackWidth = track.scrollWidth / 4;
             if (trackWidth <= 0) return;
 
-            const pixelsPerSecond = 65; // Elegant speed
+            const pixelsPerSecond = 65; 
             const durationSeconds = trackWidth / pixelsPerSecond;
 
             track.style.animation = 'none';
-            void track.offsetHeight; // Force reflow
+            void track.offsetHeight; 
 
-            // Detect RTL to choose correct animation direction
+            
             const isRTL = document.body.classList.contains('dir-rtl');
             const animationName = isRTL ? 'scroll-right' : 'scroll-left';
             
             track.style.animation = `${animationName} ${durationSeconds}s linear infinite`;
         }
 
-        // Initial setup after images and sub-components are likely loaded
+        
         window.addEventListener('load', updateAnimation);
-        setTimeout(updateAnimation, 500); // Fallback for dynamic content cases
+        setTimeout(updateAnimation, 500); 
 
-        // Recalculate on window resize
+        
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -1189,7 +1248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
         if (!form) return;
 
-        // EmailJS config — loaded from config.js
+        
         const cfg = window.PORTFOLIO_CONFIG || {};
         const EMAILJS_SERVICE_ID = cfg.EMAILJS_SERVICE_ID || '';
         const EMAILJS_TEMPLATE_ID = cfg.EMAILJS_TEMPLATE_ID || '';
@@ -1212,8 +1271,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                // 1. Simple Client-side Moderation & Persistence Check
-                const badWords = ['شتم', 'badword1', 'badword2']; // Minimal example blacklist
+                
+                const badWords = ['شتم', 'badword1', 'badword2']; 
                 const isBad = badWords.some(word => content.toLowerCase().includes(word) || name.toLowerCase().includes(word));
 
                 if (isBad) {
@@ -1239,7 +1298,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     date: new Date().toISOString()
                 };
 
-                // AI Moderation Fallback (if enabled via proxy)
+                
                 const useProxy = cfg.USE_PROXY || false;
                 const proxyUrl = cfg.PROXY_URL || "";
                 if (useProxy && proxyUrl) {
@@ -1267,11 +1326,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                // 2. Add to UI locally (Immediate and bilingual)
+                
                 testimonials.unshift(finalizedTestimonial);
                 renderTestimonials(localStorage.getItem('lang') || 'en');
 
-                // 3. Email Sending (Using translated content for notification if possible)
+                
                 if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY && typeof emailjs !== 'undefined') {
                     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                         name: finalizedTestimonial.name_en + " / " + finalizedTestimonial.name_ar,
@@ -1344,7 +1403,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!expContainer) return;
         expContainer.innerHTML = '';
 
-        // Pagination for experience
+        
         const totalItems = experience.length;
         const startIndex = (currentExpPage - 1) * EXP_PER_PAGE;
         const pagedExperience = experience.slice(startIndex, startIndex + EXP_PER_PAGE);
@@ -1422,7 +1481,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!skillsGrid) return;
         skillsGrid.innerHTML = '';
 
-        // Pagination for skills
+        
         const totalItems = skills.length;
         const startIndex = (currentSkillsPage - 1) * SKILLS_PER_PAGE;
         const pagedSkills = skills.slice(startIndex, startIndex + SKILLS_PER_PAGE);
@@ -1457,15 +1516,15 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('skills').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        // Trigger reveal observer for new cards
+        
         const newReveals = skillsGrid.querySelectorAll('.reveal');
         newReveals.forEach(el => revealObserver.observe(el));
 
-        // Refresh card cache for glow
+        
         window.dispatchEvent(new Event('portfolioRender'));
     }
 
-    // Function to get all portfolio context for the AI
+    
     window.getPortfolioContext = function () {
         let context = "Mohamed Salah's Portfolio Context:\n\nProjects:\n";
         projects.forEach(p => {
@@ -1482,7 +1541,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return context;
     };
 
-    // Modal Logic encapsulated
+    
     const modal = document.getElementById('unifiedModal');
     const modalContentContainer = document.getElementById('modal-dynamic-content');
     const closeBtn = document.querySelector('.close-modal');
@@ -1491,11 +1550,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function attachModalEvents() {
         document.querySelectorAll('.project-card, .open-project-modal').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Determine source: If clicking a button inside a card, let the button handle it.
-                // If clicking the card itself (not the button), use the card's data-id if available,
-                // or find the first button inside it.
+                
+                
+                
                 let targetEl = btn;
-                if (btn.classList.contains('project-card') && e.target.closest('button')) return; // let button handler run if present
+                if (btn.classList.contains('project-card') && e.target.closest('button')) return; 
 
                 const card = btn.closest('.project-card') || btn;
                 const modalBtn = card.querySelector('.open-project-modal');
@@ -1546,12 +1605,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.open-service-modal, .service-card').forEach(el => {
             el.addEventListener('click', (e) => {
-                // If clicking the button, let the other listener handle it if needed, 
-                // but actually we can handle both here reliably.
+                
+                
                 const serviceId = el.getAttribute('data-id');
                 if (!serviceId) return;
 
-                // Prevent duplicate trigger if clicking the button inside the card
+                
                 if (el.classList.contains('service-card') && e.target.closest('button')) return;
 
                 const service = services.find(s => s.id === serviceId);
@@ -1608,7 +1667,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             showModal();
 
-            // Direct download handler to bypass browser preview
+            
             document.getElementById('download-cv-btn').addEventListener('click', async () => {
                 const btn = document.getElementById('download-cv-btn');
                 const originalContent = btn.innerHTML;
@@ -1631,7 +1690,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.innerHTML = originalContent;
                 } catch (error) {
                     console.error('Download failed:', error);
-                    // Fallback to direct link if fetch fails
+                    
                     const link = document.createElement('a');
                     link.href = 'Mohamed_Salah_Resume.pdf';
                     link.download = 'Mohamed_Salah_Resume.pdf';
@@ -1646,15 +1705,15 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'flex';
         void modal.offsetWidth;
         modal.classList.add('show');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden'; 
     };
 
     const closeModal = () => {
         modal.classList.remove('show');
-        document.body.style.overflow = ''; // Restore background scrolling
+        document.body.style.overflow = ''; 
         setTimeout(() => {
             modal.style.display = 'none';
-            // Stop video if any is playing when closed
+            
             const video = modalContentContainer.querySelector('video');
             if (video) video.pause();
             modalContentContainer.innerHTML = '';
@@ -1669,13 +1728,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Translation Logic
+    
     function applyTranslation(lang) {
         try {
             document.querySelectorAll('[data-en]').forEach(el => {
                 const translation = el.getAttribute(`data-${lang}`);
                 if (translation) {
-                    // If it's a simple text element (no children), or specifically marked
+                    
                     if (el.children.length === 0 || el.hasAttribute('data-translate-inner')) {
                         el.textContent = translation;
                     } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
@@ -1684,7 +1743,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Direction Toggle
+            
             const body = document.body;
             if (lang === 'ar') {
                 body.classList.add('dir-rtl');
@@ -1698,7 +1757,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.title = 'Mohamed Salah';
             }
 
-            // Re-render Dynamic Sections Safely
+            
             const renderSafe = (fn, name) => {
                 try { if (typeof fn === 'function') fn(lang); } catch (e) { console.warn(`Render failed for ${name}:`, e); }
             };
@@ -1711,7 +1770,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderSafe(window.renderSkills, 'Skills');
             renderSafe(window.renderTestimonials, 'Testimonials');
 
-            // Update Filter Buttons explicitly
+            
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 const val = btn.getAttribute(`data-${lang}`);
                 if (val) btn.textContent = val;
@@ -1726,25 +1785,25 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('lang', currentLang);
         applyTranslation(currentLang);
 
-        // Re-initialize typing effect for the new language
+        
         initTypingEffect();
 
-        // Re-apply filter button labels
+        
         if (window.initProjectFilter) window.initProjectFilter();
 
-        // Notify chatbot of language change if it exists
+        
         if (window.portfolioChatbot && typeof window.portfolioChatbot.updateTooltip === 'function') {
             window.portfolioChatbot.updateTooltip();
         }
     });
 
-    // Initialize formatting based on saved theme and language
+    
     applyTranslation(currentLang);
 
-    // Set Copyright Year
+    
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // Mobile Menu Toggle
+    
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const navLinksItems = document.querySelectorAll('.nav-links a');
@@ -1759,7 +1818,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close mobile menu when a nav link is clicked
+        
         navLinksItems.forEach(link => {
             link.addEventListener('click', () => {
                 if (navLinks.classList.contains('active')) {
@@ -1774,12 +1833,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Smooth Scrolling for Nav Links (adjusted)
+    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
 
-            // Close mobile menu if open
+            
             if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 const icon = hamburger.querySelector('i');
@@ -1805,14 +1864,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    // Scroll Reveal Animation
+    
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
 
-                // If it's a skill card, animate the progress bars
+                
                 if (entry.target.classList.contains('skill-card')) {
                     const bars = entry.target.querySelectorAll('.progress');
                     bars.forEach(bar => {
@@ -1826,7 +1885,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Interactive Glass Glow Effect — throttled with RAF for performance
+    
     let cachedCards = document.querySelectorAll('.project-card, .skill-card');
     const refreshCardCache = () => { cachedCards = document.querySelectorAll('.project-card, .skill-card'); };
     window.addEventListener('portfolioRender', refreshCardCache);
@@ -1846,7 +1905,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { passive: true });
 
-    // ── Typing Effect ──────────────────────────────────
+    
     let titleTypingTimer;
     function initTypingEffect() {
         if (titleTypingTimer) clearTimeout(titleTypingTimer);
@@ -1892,12 +1951,12 @@ document.addEventListener('DOMContentLoaded', () => {
             titleTypingTimer = setTimeout(typeTitle, isDeleting ? 18 : 32);
         }
 
-        // Reset span
+        
         titleSpan.textContent = '';
         titleTypingTimer = setTimeout(typeTitle, 1000);
     }
 
-    // --- High-End Interactivity: 3D Card Tilt ---
+    
     function initTiltEffect() {
         const cards = document.querySelectorAll('.project-card, .service-card, .skill-card, .stat-card');
 
@@ -1922,7 +1981,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- High-End Interactivity: Magnetic Elements ---
+    
     function initMagneticElements() {
         const magneticEls = document.querySelectorAll('.social-links-hero a, .navbar-brand, .btn-primary, .theme-btn');
 
@@ -1941,7 +2000,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NEW: Dynamic Neural Connectivity (Particles) Background ---
+    
 
     function initNeuralBackground() {
         const canvas = document.getElementById('data-flow-canvas');
@@ -1952,7 +2011,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let height = canvas.height = window.innerHeight;
 
         let particles = [];
-        // تقليل عدد الجسيمات بنسبة 50% لتخفيف الضغط على CPU/GPU
+        
         const particleCount = Math.min(Math.floor((width * height) / 30000), 50);
         const connectionDistance = 140;
         const mouseRadius = 180;
@@ -1973,11 +2032,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             update() {
-                // Return to original flow if mouse is away
+                
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Mouse interaction (gentle attraction)
+                
                 if (mouse.x !== null) {
                     const dx = mouse.x - this.x;
                     const dy = mouse.y - this.y;
@@ -1988,14 +2047,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                // Bounce off edges
+                
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
             }
 
             draw() {
                 const isLightMode = document.documentElement.classList.contains('light');
-                // توحيد الألوان مع الثيم: ذهبي في Dark ، Teal في Light
+                
                 ctx.fillStyle = isLightMode ? 'rgba(13, 148, 136, 0.5)' : 'rgba(212, 175, 55, 0.5)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -2013,7 +2072,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const connectionDistanceSq = connectionDistance * connectionDistance;
 
         let lastTime = 0;
-        const fpsInterval = 1000 / 30; // 30 FPS throttle
+        const fpsInterval = 1000 / 30; 
         let animationId = null;
         let isVisible = true;
 
@@ -2076,7 +2135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             animationId = requestAnimationFrame(animate);
         }
 
-        // إعادة تشغيل الحلقة عند العودة للتب
+        
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden) animate();
         });
@@ -2090,7 +2149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         init();
         animate();
     }
-    // --- Letter Glitch Background ---
+    
     function initLetterGlitch(containerId, options = {}) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -2109,7 +2168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.style.height = '100%';
         container.style.overflow = 'hidden';
         container.style.zIndex = '0';
-        container.style.opacity = '0.2'; // Subtle background
+        container.style.opacity = '0.2'; 
 
         const canvas = document.createElement('canvas');
         canvas.style.display = 'block';
@@ -2220,7 +2279,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     letters[index].colorProgress = 1;
                 } else {
                     letters[index].colorProgress = 0;
-                    // Keep the current color as startRgb
+                    
                 }
             }
         };
@@ -2238,7 +2297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         const currentRgb = hexToRgb(letter.color);
                         if (currentRgb && letter.targetColorRgb) {
-                            letter.color = interpolateColor(currentRgb, letter.targetColorRgb, 0.1); // Smooth toward target
+                            letter.color = interpolateColor(currentRgb, letter.targetColorRgb, 0.1); 
                         }
                     }
                     needsRedraw = true;
@@ -2308,11 +2367,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         window.addEventListener('resize', handleResize);
+        
+        
+        setInterval(() => {
+            if (window.outerWidth - window.innerWidth > 200 || window.outerHeight - window.innerHeight > 200) {
+                console.clear();
+            }
+        }, 1000);
+
         resizeCanvas();
         animate();
     }
 
-    // --- Background Parallax Effect ---
+    
     function initParallax() {
         if (window.matchMedia("(max-width: 768px)").matches) return;
 
@@ -2325,7 +2392,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Professional Lagging Cursor Logic ---
+    
     function initCustomCursor() {
         const cursor = document.getElementById('custom-cursor');
         const dot = cursor.querySelector('.cursor-dot');
@@ -2341,7 +2408,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseX = e.clientX;
             mouseY = e.clientY;
 
-            // For CSS glow effects on cards
+            
             document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
             document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
         });
@@ -2349,11 +2416,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const animateCursor = () => {
             const lerp = (a, b, n) => (1 - n) * a + n * b;
 
-            // Dot follows almost instantly
+            
             dotX = lerp(dotX, mouseX, 0.3);
             dotY = lerp(dotY, mouseY, 0.3);
 
-            // Ring lags behind (the "circle under the arrow" effect)
+            
             ringX = lerp(ringX, mouseX, 0.12);
             ringY = lerp(ringY, mouseY, 0.12);
 
@@ -2364,7 +2431,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         animateCursor();
 
-        // Hover states - Premium selection of interactive elements
+        
         const interactiveElements = 'a, button, .project-card, .service-card, .skill-card, .play-overlay, .social-links-hero a, .control-btn';
         document.addEventListener('mouseover', (e) => {
             if (e.target.closest(interactiveElements)) {
@@ -2377,7 +2444,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Click animation
+        
         document.addEventListener('mousedown', () => {
             cursor.classList.add('active');
             const ping = document.createElement('div');
@@ -2391,7 +2458,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.classList.remove('active');
         });
     }
-    // --- Squares Background for Skills ---
+    
     function initSquaresBackground(containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -2490,7 +2557,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // --- Hyperspeed Background for Projects ---
+    
     function initHyperspeedBackground(containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -2516,7 +2583,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const ctx = canvas.getContext('2d');
         const stars = [];
-        // تقليل عدد النجوم لتخفيف الضغط
+        
         const numStars = window.innerWidth < 768 ? 60 : 100;
         const speed = 2.5;
 
@@ -2595,7 +2662,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // --- Liquid Flow Background for Contact ---
+    
     function initLiquidFlowBackground(containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -2680,7 +2747,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // Expose functions to window for callback access
+    
     window.renderProjects = renderProjects;
     window.renderServices = renderServices;
     window.renderCertifications = renderCertifications;
@@ -2690,17 +2757,17 @@ document.addEventListener('DOMContentLoaded', () => {
     window.renderTestimonials = renderTestimonials;
     window.applyTranslation = applyTranslation;
 
-    // Final Initialization Sequence
+    
     initTestimonials();
     initCustomCursor();
     initTypingEffect();
     updateDynamicStats();
 
-    // Initial translation and render (critical - runs immediately)
+    
     applyTranslation(currentLang);
 
-    // Defer ALL heavy canvas/animation effects to avoid blocking the main thread
-    // requestIdleCallback runs when the browser is idle, preventing TBT spike
+    
+    
     const runWhenIdle = window.requestIdleCallback
         ? (fn) => window.requestIdleCallback(fn, { timeout: 2000 })
         : (fn) => setTimeout(fn, 200);
@@ -2709,7 +2776,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const isMobileDevice = window.innerWidth < 768;
 
-        // Letter glitch - visually rich but non-critical
+        
         if (!isReducedMotion && !isMobileDevice) {
             initLetterGlitch('letter-glitch-container', {
                 glitchColors: ['#10b981', '#34d399', '#6ee7b7'],
@@ -2720,24 +2787,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Neural background (canvas animation)
+        
         initNeuralBackground();
         initParallax();
 
-        // Section-specific canvas backgrounds
+        
         if (!isMobileDevice) {
             initSquaresBackground('skills');
             initHyperspeedBackground('projects');
             initLiquidFlowBackground('contact');
         }
 
-        // Interaction effects
+        
         initTiltEffect();
         initMagneticElements();
     });
 });
 
-// ─── Scroll Progress Bar (Optimized) ──────────────────────────
+
 (function () {
     const bar = document.getElementById('scroll-progress');
     if (!bar) return;

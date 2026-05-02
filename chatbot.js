@@ -1,14 +1,11 @@
-﻿/**
- * AI Chatbot for Mohamed Salah's Portfolio
- * Multi-Provider AI (Gemini + GitHub Models + OpenRouter)
- */
+﻿
 
 class PortfolioChatbot {
     constructor() {
         this.container = document.getElementById('chatbot-container');
         this.isOpen = false;
 
-        // --- CONFIGURATION (loaded from config.js) ---
+        
         const cfg = window.PORTFOLIO_CONFIG || {};
         this.useProxy = cfg.USE_PROXY || false;
         this.proxyUrl = cfg.PROXY_URL || "";
@@ -16,7 +13,7 @@ class PortfolioChatbot {
         this.githubToken = cfg.GITHUB_TOKEN || "";
         this.openrouterKey = cfg.OPENROUTER_KEY || "";
 
-        // Providers and their respective model lists
+        
         this.geminiModels = [
             "gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-pro", "gemini-1.5-flash",
             "gemini-2.5-pro", "gemini-flash-latest", "gemini-pro-latest", "gemini-2.0-flash-001",
@@ -48,11 +45,11 @@ class PortfolioChatbot {
         this.currentGeminiIndex = 0;
         this.currentGithubIndex = 0;
         this.currentOpenRouterIndex = 0;
-        // ---------------------
+        
 
         this.chatHistory = [];
         this.lastMessageTime = 0;
-        this.siteContext = ""; // Dynamic site-wide data
+        this.siteContext = ""; 
 
         this.init();
     }
@@ -61,7 +58,7 @@ class PortfolioChatbot {
         this.loadHistory();
         this.render();
         this.bindEvents();
-        // Only add welcome if history is empty
+        
         if (this.chatHistory.length === 0) {
             this.addWelcomeMessage();
         } else {
@@ -173,7 +170,7 @@ class PortfolioChatbot {
             this.input.focus();
             this.fab.querySelector('.notification-dot').style.display = 'none';
             this.tooltip.style.display = 'none';
-            this.extractSiteData(); // Refresh knowledge when opening
+            this.extractSiteData(); 
             this.renderQuickActions();
         } else {
             this.updateTooltip();
@@ -181,22 +178,22 @@ class PortfolioChatbot {
     }
 
     extractSiteData() {
-        // Hero Data
+        
         const name = document.querySelector('.name')?.innerText || "";
         const title = document.querySelector('.title')?.innerText || "";
         const bio = document.querySelector('.hero-desc')?.innerText || "";
 
-        // About Data
+        
         const aboutText = Array.from(document.querySelectorAll('.about-text p')).map(p => p.innerText).join(" ");
 
-        // Skills Data
+        
         const skills = Array.from(document.querySelectorAll('.skill-card')).map(card => {
             const category = card.querySelector('h3')?.innerText || "";
             const tags = Array.from(card.querySelectorAll('.skill-progress-item span:first-child')).map(s => s.innerText).join(", ");
             return `${category}: ${tags}`;
         }).join(" | ");
 
-        // Experience Data
+        
         const experience = Array.from(document.querySelectorAll('.experience-card')).map(card => {
             const pos = card.querySelector('h3')?.innerText || "";
             const company = card.querySelector('.company')?.innerText || "";
@@ -204,7 +201,7 @@ class PortfolioChatbot {
             return `${pos} at ${company}: ${desc}`;
         }).join(" | ");
 
-        // Projects Data
+        
         const projects = Array.from(document.querySelectorAll('.project-card')).map(card => {
             const title = card.querySelector('h3')?.innerText || "";
             const desc = card.querySelector('.project-desc')?.innerText || "";
@@ -262,12 +259,12 @@ class PortfolioChatbot {
                     }
                 }
 
-                // Clicking a button now just executes the action silently
-                // No handleSendMessage call here as per user request
+                
+                
             });
         });
 
-        // Hide by default unless specifically triggered by conversation
+        
         container.style.display = 'none';
     }
 
@@ -282,7 +279,7 @@ class PortfolioChatbot {
             this.tooltip.style.display = 'block';
             setTimeout(() => this.tooltip.classList.add('show'), 100);
         } else {
-            // Refresh quick actions if open to match new language
+            
             this.renderQuickActions();
         }
     }
@@ -305,7 +302,7 @@ class PortfolioChatbot {
             messageDiv.appendChild(contentDiv);
             this.messagesDiv.appendChild(messageDiv);
 
-            // Typewriter effect for bot
+            
             this.typeWriter(contentDiv, text);
         } else {
             messageDiv.textContent = text;
@@ -328,7 +325,7 @@ class PortfolioChatbot {
     }
 
     executeCommanderTags(text) {
-        // Detect commands like [COMMAND: SCROLL #projects]
+        
         const scrollMatch = text.match(/\[COMMAND: SCROLL (#[a-z-]+)\]/i);
         if (scrollMatch) {
             const targetId = scrollMatch[1];
@@ -336,11 +333,11 @@ class PortfolioChatbot {
             if (element) {
                 setTimeout(() => {
                     element.scrollIntoView({ behavior: 'smooth' });
-                }, 1000); // Small delay after message appears
+                }, 1000); 
             }
         }
 
-        // Detect command to open CV
+        
         if (text.includes('[COMMAND: OPEN_CV]')) {
             const cvBtn = document.getElementById('cv-modal-btn');
             if (cvBtn) {
@@ -350,14 +347,14 @@ class PortfolioChatbot {
             }
         }
 
-        // Detect command to open WhatsApp
+        
         if (text.includes('[COMMAND: OPEN_WHATSAPP]')) {
             window.open('https://wa.me/201148295790', '_blank');
         }
     }
 
     typeWriter(element, text) {
-        // Remove commands from display text
+        
         const displayText = text.replace(/\[COMMAND: [A-Z0-9 _#]+\]/gi, '').trim();
 
         let i = 0;
@@ -383,13 +380,13 @@ class PortfolioChatbot {
         const text = overrideText || this.input.value.trim();
         if (!text) return;
 
-        // Simple Rate Limiting
+        
         const now = Date.now();
-        if (now - this.lastMessageTime < 1000) return; // Prevent spamming (2s cool down)
+        if (now - this.lastMessageTime < 1000) return; 
         this.lastMessageTime = now;
 
         const container = document.getElementById('quick-actions');
-        container.style.display = 'none'; // Hide when user types
+        container.style.display = 'none'; 
 
         this.addMessage(text, 'user');
         if (!overrideText) this.input.value = '';
@@ -401,14 +398,14 @@ class PortfolioChatbot {
             this.showTyping(false);
             this.addMessage(response, 'bot');
 
-            // Keyword Detection to show buttons relevant to the conversation
+            
             this.detectAndShowActions(text, response);
         } catch (error) {
             console.error("AI Error:", error);
             this.showTyping(false);
             const errorMessage = error.message || "All AI providers are currently unavailable.";
             this.addMessage(`⚠️ ${errorMessage}`, 'bot');
-            container.style.display = 'flex'; // Show back if error to give options
+            container.style.display = 'flex'; 
         }
     }
 
@@ -429,15 +426,15 @@ class PortfolioChatbot {
     }
 
     async getAIResponse(userQuery) {
-        // Refresh site context before every AI response to catch updates
+        
         this.extractSiteData();
 
-        // Context Window Optimization: Send only last 10 messages
-        // chatHistory already contains the userQuery at the end
+        
+        
         const contextHistory = this.chatHistory.slice(-10);
 
         try {
-            // Try Gemini Providers first
+            
             try {
                 return await this.callGeminiAPI(contextHistory);
             } catch (geminiError) {
@@ -648,11 +645,11 @@ class PortfolioChatbot {
                 this.tooltip.classList.add('wiggle');
                 setTimeout(() => this.tooltip.classList.remove('wiggle'), 1000);
             }
-        }, 5000); // Wiggle every 5 seconds
+        }, 5000); 
     }
 }
 
-// Initialize Chatbot when DOM is ready
+
 document.addEventListener('DOMContentLoaded', () => {
     window.portfolioChatbot = new PortfolioChatbot();
 });
