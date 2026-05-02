@@ -659,8 +659,8 @@ document.addEventListener('DOMContentLoaded', () => {
             avatar: "https://i.pravatar.cc/150?u=tariq"
         },
         {
-            name_en: "Nour El Din Mohamed",
-            name_ar: "نور الدين محمد",
+            name_en: "Nour Eldin",
+            name_ar: "نور الدين",
             role_en: "Startup Founder",
             role_ar: "مؤسس شركة ناشئة",
             content_en: "Excellent communication and deep understanding of business requirements. Delivered precisely what we needed.",
@@ -714,10 +714,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectCount = 30; // Set strictly to 30 as requested
 
         const statsMap = {
-            'stat-years':    yearsExp,        // e.g. 3+ (matches bio text)
+            'stat-years': yearsExp,        // e.g. 3+ (matches bio text)
             'stat-projects': projectCount,    // actual project count
-            'stat-reports':  40,
-            'stat-hours':    10
+            'stat-reports': 40,
+            'stat-hours': 10
         };
 
         for (const [id, val] of Object.entries(statsMap)) {
@@ -856,7 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderPaginationControls(containerId, totalItems, itemsPerPage, currentPage, onPageChange) {
         const container = document.getElementById(containerId);
         if (!container) return;
-        
+
         const totalPages = Math.ceil(totalItems / itemsPerPage);
         if (totalPages <= 1) {
             container.innerHTML = '';
@@ -868,7 +868,7 @@ document.addEventListener('DOMContentLoaded', () => {
             html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
         }
         html += '</div>';
-        
+
         container.innerHTML = html;
 
         container.querySelectorAll('.page-btn').forEach(btn => {
@@ -1023,14 +1023,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!btn) return;
             servicesFilters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
+
             // Reset to page 1 on filter change
             currentServicesPage = 1;
 
             // Decode the filter attribute just in case '&' became '&amp;' in the DOM
             let rawFilter = btn.getAttribute('data-filter') || 'all';
             activeServiceFilter = decodeHTMLEntities(rawFilter);
-            
+
             const lang = localStorage.getItem('lang') || 'en';
             renderServices(lang);
         });
@@ -1148,25 +1148,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prevBtn) prevBtn.style.display = 'none';
         if (nextBtn) nextBtn.style.display = 'none';
 
-        // Duplicate content for a seamless loop (2 sets) - Trimmed to avoid whitespace gaps
+        // Duplicate content 4 times for a safe seamless loop on all screen sizes
         const originalHTML = track.innerHTML.trim();
-        track.innerHTML = originalHTML + originalHTML;
+        track.innerHTML = originalHTML + originalHTML + originalHTML + originalHTML;
 
         // Calculate animation duration based on actual width
         function updateAnimation() {
-            // Get the original single-loop width (before duplication)
-            // Ensure we measure after children are rendered
-            const trackWidth = track.scrollWidth / 2;
+            // Get the width of ONE set (total / 4)
+            const trackWidth = track.scrollWidth / 4;
             if (trackWidth <= 0) return;
 
-            const pixelsPerSecond = 75; // Very slow and elegant speed
+            const pixelsPerSecond = 65; // Elegant speed
             const durationSeconds = trackWidth / pixelsPerSecond;
-            
+
             track.style.animation = 'none';
             void track.offsetHeight; // Force reflow
+
+            // Detect RTL to choose correct animation direction
+            const isRTL = document.body.classList.contains('dir-rtl');
+            const animationName = isRTL ? 'scroll-right' : 'scroll-left';
             
-            // Mathematically perfect loop: translateX(-50%) maps Set 2 exactly to Set 1's start
-            track.style.animation = `scroll-left ${durationSeconds}s linear infinite`;
+            track.style.animation = `${animationName} ${durationSeconds}s linear infinite`;
         }
 
         // Initial setup after images and sub-components are likely loaded
@@ -1189,9 +1191,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // EmailJS config — loaded from config.js
         const cfg = window.PORTFOLIO_CONFIG || {};
-        const EMAILJS_SERVICE_ID  = cfg.EMAILJS_SERVICE_ID  || '';
+        const EMAILJS_SERVICE_ID = cfg.EMAILJS_SERVICE_ID || '';
         const EMAILJS_TEMPLATE_ID = cfg.EMAILJS_TEMPLATE_ID || '';
-        const EMAILJS_PUBLIC_KEY  = cfg.EMAILJS_PUBLIC_KEY  || '';
+        const EMAILJS_PUBLIC_KEY = cfg.EMAILJS_PUBLIC_KEY || '';
 
         if (EMAILJS_PUBLIC_KEY && typeof emailjs !== 'undefined') {
             emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
@@ -1199,9 +1201,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const name      = escapeHTML(document.getElementById('fb-name')?.value.trim() || '');
-            const role      = escapeHTML(document.getElementById('fb-role')?.value.trim() || '');
-            const content   = escapeHTML(document.getElementById('fb-content')?.value.trim() || '');
+            const name = escapeHTML(document.getElementById('fb-name')?.value.trim() || '');
+            const role = escapeHTML(document.getElementById('fb-role')?.value.trim() || '');
+            const content = escapeHTML(document.getElementById('fb-content')?.value.trim() || '');
             const recommend = form.querySelector('input[name="recommend"]:checked')?.value || 'yes';
 
             if (submitBtn) {
@@ -1215,7 +1217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isBad = badWords.some(word => content.toLowerCase().includes(word) || name.toLowerCase().includes(word));
 
                 if (isBad) {
-                    const failMsg = localStorage.getItem('lang') === 'ar' 
+                    const failMsg = localStorage.getItem('lang') === 'ar'
                         ? 'عذراً، يحتوي التعليق على كلمات غير لائقة. يرجى مراجعته.'
                         : 'Sorry, your feedback contains inappropriate language. Please review it.';
                     alert(failMsg);
@@ -1252,8 +1254,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                         const modData = await modResponse.json();
                         if (modData.result === 'FAIL') {
-                             alert(localStorage.getItem('lang') === 'ar' ? 'تم رفض التعليق من قبل نظام الرقابة.' : 'Review rejected by moderation system.');
-                             if (submitBtn) {
+                            alert(localStorage.getItem('lang') === 'ar' ? 'تم رفض التعليق من قبل نظام الرقابة.' : 'Review rejected by moderation system.');
+                            if (submitBtn) {
                                 submitBtn.disabled = false;
                                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span data-en="Submit Review" data-ar="إرسال التقييم">Submit Review</span>';
                             }
@@ -1278,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         recommend: recommend
                     });
                 }
-                
+
                 form.classList.add('hidden');
                 successMsg.classList.remove('hidden');
                 setTimeout(() => {
@@ -1302,7 +1304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCertifications(lang) {
         if (!certsContainer) return;
         certsContainer.innerHTML = '';
-        
+
         const totalItems = certifications.length;
         const startIndex = (currentCertsPage - 1) * CERTS_PER_PAGE;
         const pagedCerts = certifications.slice(startIndex, startIndex + CERTS_PER_PAGE);
@@ -1330,7 +1332,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             certsContainer.insertAdjacentHTML('beforeend', certHTML);
         });
-        
+
         renderPaginationControls('certs-pagination', totalItems, CERTS_PER_PAGE, currentCertsPage, (page) => {
             currentCertsPage = page;
             renderCertifications(lang);
@@ -1427,7 +1429,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         pagedSkills.forEach((skill, index) => {
             const category = lang === 'ar' ? skill.category_ar : skill.category_en;
-            
+
             const skillItemsHTML = skill.items.map(item => `
                 <div class="skill-progress-item">
                     <span>${item.name}</span>
@@ -1458,7 +1460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Trigger reveal observer for new cards
         const newReveals = skillsGrid.querySelectorAll('.reveal');
         newReveals.forEach(el => revealObserver.observe(el));
-        
+
         // Refresh card cache for glow
         window.dispatchEvent(new Event('portfolioRender'));
     }
@@ -1698,7 +1700,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Re-render Dynamic Sections Safely
             const renderSafe = (fn, name) => {
-                try { if(typeof fn === 'function') fn(lang); } catch (e) { console.warn(`Render failed for ${name}:`, e); }
+                try { if (typeof fn === 'function') fn(lang); } catch (e) { console.warn(`Render failed for ${name}:`, e); }
             };
 
             renderSafe(window.renderProjects, 'Projects');
@@ -1776,7 +1778,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             // Close mobile menu if open
             if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
@@ -1852,18 +1854,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!titleSpan) return;
 
         const lang = localStorage.getItem('lang') || 'en';
-        
+
         const titlePhrases = lang === 'ar'
             ? [
                 'محلل بيانات',
                 'أخصائي ذكاء أعمال',
                 'مطور حلول ذكاء اصطناعي'
-              ]
+            ]
             : [
                 'Data Analyst',
                 'BI Specialist',
                 'AI Solutions Developer'
-              ];
+            ];
 
         let titleIdx = 0, charIdx = 0, isDeleting = false;
 
@@ -1882,7 +1884,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 titleTypingTimer = setTimeout(typeTitle, 2200);
                 return;
             }
-            
+
             if (isDeleting && charIdx === 0) {
                 isDeleting = false;
                 titleIdx = (titleIdx + 1) % titlePhrases.length;
@@ -1900,22 +1902,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- High-End Interactivity: 3D Card Tilt ---
     function initTiltEffect() {
         const cards = document.querySelectorAll('.project-card, .service-card, .skill-card, .stat-card');
-        
+
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const rotateX = (y - centerY) / 10;
                 const rotateY = (centerX - x) / 10;
-                
+
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
             });
@@ -1925,16 +1927,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- High-End Interactivity: Magnetic Elements ---
     function initMagneticElements() {
         const magneticEls = document.querySelectorAll('.social-links-hero a, .navbar-brand, .btn-primary, .theme-btn');
-        
+
         magneticEls.forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const rect = el.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                
+
                 el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
             });
-            
+
             el.addEventListener('mouseleave', () => {
                 el.style.transform = `translate(0, 0)`;
             });
@@ -2038,7 +2040,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 animationId = requestAnimationFrame(animate);
                 return;
             }
-            
+
             lastTime = timestamp - (elapsed % fpsInterval);
 
             const isLightMode = document.documentElement.classList.contains('light');
@@ -2315,11 +2317,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Background Parallax Effect ---
     function initParallax() {
         if (window.matchMedia("(max-width: 768px)").matches) return;
-        
+
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX - window.innerWidth / 2) / 70;
             const y = (e.clientY - window.innerHeight / 2) / 70;
-            
+
             document.documentElement.style.setProperty('--bg-x', `${-x}px`);
             document.documentElement.style.setProperty('--bg-y', `${-y}px`);
         });
@@ -2330,7 +2332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cursor = document.getElementById('custom-cursor');
         const dot = cursor.querySelector('.cursor-dot');
         const ring = cursor.querySelector('.cursor-ring');
-        
+
         if (!cursor || window.matchMedia("(max-width: 768px)").matches) return;
 
         let mouseX = 0, mouseY = 0;
@@ -2348,18 +2350,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const animateCursor = () => {
             const lerp = (a, b, n) => (1 - n) * a + n * b;
-            
+
             // Dot follows almost instantly
             dotX = lerp(dotX, mouseX, 0.3);
             dotY = lerp(dotY, mouseY, 0.3);
-            
+
             // Ring lags behind (the "circle under the arrow" effect)
             ringX = lerp(ringX, mouseX, 0.12);
             ringY = lerp(ringY, mouseY, 0.12);
 
             if (dot) dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
             if (ring) ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-            
+
             requestAnimationFrame(animateCursor);
         };
         animateCursor();
@@ -2410,7 +2412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.style.height = '100%';
         canvas.style.zIndex = '0';
         canvas.style.pointerEvents = 'none';
-        
+
         container.style.position = 'relative';
         container.style.overflow = 'hidden';
         container.insertBefore(canvas, container.firstChild);
@@ -2454,7 +2456,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             ctx.strokeStyle = 'rgba(16, 185, 129, 0.04)';
             ctx.lineWidth = 1;
             const cols = Math.ceil(canvas.width / squareSize);
@@ -2509,7 +2511,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.style.height = '100%';
         canvas.style.zIndex = '0';
         canvas.style.pointerEvents = 'none';
-        
+
         container.style.position = 'relative';
         container.style.overflow = 'hidden';
         container.insertBefore(canvas, container.firstChild);
@@ -2556,7 +2558,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            
+
             const isLight = document.documentElement.classList.contains('light');
             ctx.fillStyle = isLight ? 'rgba(244, 244, 249, 0.3)' : 'rgba(9, 10, 15, 0.3)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -2615,7 +2617,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.style.zIndex = '0';
         canvas.style.pointerEvents = 'none';
         canvas.style.opacity = '0.4';
-        
+
         container.style.position = 'relative';
         container.style.overflow = 'hidden';
         container.insertBefore(canvas, container.firstChild);
@@ -2641,7 +2643,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             const isLight = document.documentElement.classList.contains('light');
             ctx.globalCompositeOperation = isLight ? 'source-over' : 'screen';
 
@@ -2705,7 +2707,7 @@ document.addEventListener('DOMContentLoaded', () => {
             smooth: true
         });
     }
-    
+
     initNeuralBackground();
     initTypingEffect();
     initParallax();
@@ -2727,7 +2729,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ─── Scroll Progress Bar (Optimized) ──────────────────────────
-(function() {
+(function () {
     const bar = document.getElementById('scroll-progress');
     if (!bar) return;
     let ticking = false;
