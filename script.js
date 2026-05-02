@@ -1034,6 +1034,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const authorBlock = `
                 <div class="author-info" style="margin-top:6px; text-align:center;">
+                    <div class="stars" style="color: #FFD700; font-size: 0.9rem; margin-bottom: 8px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
                     <h4 style="margin:0; font-size:1.1rem; color:var(--text-primary);">${escapeHTML(name)}</h4>
                     <p style="margin:0; color:var(--text-secondary); font-size:0.9rem;">${escapeHTML(role)}</p>
                 </div>
@@ -1084,8 +1087,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const trackWidth = track.scrollWidth / 2;
             if (trackWidth <= 0) return;
 
-            const pixelsPerSecond = 120; // Faster scrolling speed as requested
-            const durationSeconds = Math.max(10, Math.round(trackWidth / pixelsPerSecond));
+            const pixelsPerSecond = 220; // Increased scrolling speed
+            const durationSeconds = Math.max(8, Math.round(trackWidth / pixelsPerSecond));
             
             track.style.animation = 'none';
             void track.offsetHeight; // Force reflow
@@ -1729,12 +1732,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ── Typing Effect ──────────────────────────────────
-    let typingTimer;
+    let titleTypingTimer;
     function initTypingEffect() {
-        if (typingTimer) clearTimeout(typingTimer);
+        if (titleTypingTimer) clearTimeout(titleTypingTimer);
         const titleSpan = document.querySelector('.title span[data-en]');
-        const descSpan = document.querySelector('.hero-desc span:not(.typed-cursor)');
-        if (!titleSpan || !descSpan) return;
+        if (!titleSpan) return;
 
         const lang = localStorage.getItem('lang') || 'en';
         
@@ -1749,70 +1751,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 'BI Specialist',
                 'AI Solutions Developer'
               ];
-            
-        const descText = lang === 'ar'
-            ? 'محلل بيانات أركز على تحقيق النتائج، بخبرة تزيد عن 3 سنوات في قطاعات متعددة. أطور حلول متكاملة لذكاء الأعمال، وأنظمة معالجة البيانات (ETL)، وأطر عمل لتحسين مؤشرات الأداء (KPIs) لدعم اتخاذ القرارات الإدارية بدقة.'
-            : 'Results-driven Data Analyst with 3+ years of cross-industry experience delivering end-to-end business intelligence solutions, ETL pipelines, and KPI optimization frameworks that drive measurable executive decision-making.';
 
         let titleIdx = 0, charIdx = 0, isDeleting = false;
-        let isTypingDesc = false, descCharIdx = 0;
-        let descDone = false;
 
-        function type() {
-            if (!isTypingDesc) {
-                // Typing Title
-                const current = titlePhrases[titleIdx];
-                if (isDeleting) {
-                    titleSpan.textContent = current.substring(0, charIdx - 1);
-                    charIdx--;
-                } else {
-                    titleSpan.textContent = current.substring(0, charIdx + 1);
-                    charIdx++;
-                }
-
-                if (!isDeleting && charIdx === current.length) {
-                    // Title done — pause, then either type description or delete
-                    if (!descDone && titleIdx === 0) {
-                        // First time: type description
-                        isTypingDesc = true;
-                        typingTimer = setTimeout(type, 1500);
-                    } else {
-                        // Already typed desc — just wait then delete
-                        isDeleting = true;
-                        typingTimer = setTimeout(type, 2200);
-                    }
-                    return;
-                }
-                
-                if (isDeleting && charIdx === 0) {
-                    isDeleting = false;
-                    titleIdx = (titleIdx + 1) % titlePhrases.length;
-                    typingTimer = setTimeout(type, 400);
-                    return;
-                }
-                typingTimer = setTimeout(type, isDeleting ? 18 : 32);
+        function typeTitle() {
+            const current = titlePhrases[titleIdx];
+            if (isDeleting) {
+                titleSpan.textContent = current.substring(0, charIdx - 1);
+                charIdx--;
             } else {
-                // Typing Description (One-time, fast)
-                descCharIdx += 4; // Type 4 characters at once
-                if (descCharIdx > descText.length) descCharIdx = descText.length;
-                descSpan.textContent = descText.substring(0, descCharIdx);
-                
-                if (descCharIdx === descText.length) {
-                    descDone = true;
-                    isTypingDesc = false;
-                    isDeleting = true; // Start deleting the title
-                    typingTimer = setTimeout(type, 2000);
-                    return;
-                }
-                typingTimer = setTimeout(type, 5);
+                titleSpan.textContent = current.substring(0, charIdx + 1);
+                charIdx++;
             }
+
+            if (!isDeleting && charIdx === current.length) {
+                isDeleting = true;
+                titleTypingTimer = setTimeout(typeTitle, 2200);
+                return;
+            }
+            
+            if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                titleIdx = (titleIdx + 1) % titlePhrases.length;
+                titleTypingTimer = setTimeout(typeTitle, 400);
+                return;
+            }
+            titleTypingTimer = setTimeout(typeTitle, isDeleting ? 18 : 32);
         }
 
-
-        // Reset spans
+        // Reset span
         titleSpan.textContent = '';
-        descSpan.textContent = '';
-        typingTimer = setTimeout(type, 1000);
+        titleTypingTimer = setTimeout(typeTitle, 1000);
     }
 
     // --- High-End Interactivity: 3D Card Tilt ---

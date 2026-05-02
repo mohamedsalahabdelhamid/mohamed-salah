@@ -952,6 +952,25 @@ body.dir-rtl .name {
     /* Ensure space for typed cursor even if temporary empty */
 }
 
+@keyframes fadeInUpPro {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUpPro 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+    animation-delay: 0.6s;
+    opacity: 0;
+}
+
 .hero-desc {
     font-size: 1.2rem;
     color: var(--text-primary);
