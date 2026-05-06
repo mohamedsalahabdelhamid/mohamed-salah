@@ -1,4 +1,4 @@
-﻿/**
+/**
  * AI Chatbot for Mohamed Salah's Portfolio
  * Multi-Provider AI (Gemini + GitHub Models + OpenRouter)
  */
@@ -360,23 +360,13 @@ class PortfolioChatbot {
         // Remove commands from display text
         const displayText = text.replace(/\[COMMAND: [A-Z0-9 _#]+\]/gi, '').trim();
 
-        let i = 0;
-        const speed = 15;
-        element.innerHTML = "";
-
-        const type = () => {
-            if (i < displayText.length) {
-                element.textContent += displayText.charAt(i);
-                i++;
-                this.messagesDiv.scrollTop = this.messagesDiv.scrollHeight;
-                setTimeout(type, speed);
-            } else {
-                if (typeof marked !== 'undefined') {
-                    element.innerHTML = marked.parse(displayText);
-                }
-            }
-        };
-        type();
+        if (typeof marked !== 'undefined') {
+            element.innerHTML = marked.parse(displayText);
+        } else {
+            element.textContent = displayText;
+        }
+        
+        this.messagesDiv.scrollTop = this.messagesDiv.scrollHeight;
     }
 
     async handleSendMessage(overrideText = null) {
@@ -623,10 +613,11 @@ class PortfolioChatbot {
     getSystemPrompt(context) {
         return `You are Mohamed Salah's Professional AI Assistant. 
         
-        CRITICAL BILINGUAL INSTRUCTIONS:
-        1. MIRROR the user's language: If the user speaks Arabic, respond ONLY in Arabic (العربية). If they speak English, respond ONLY in English.
-        2. Format all numbers, dates, and currencies clearly with comma separators.
-        3. Use professional Markdown (bold titles, clean bullet points).
+        CRITICAL INSTRUCTIONS:
+        1. Keep responses FAST, CONCISE, and TO THE POINT. Use short or medium length answers by default. Do not write long essays unless explicitly requested by the user.
+        2. MIRROR the user's language: If the user speaks Arabic, respond ONLY in Arabic (العربية). If they speak English, respond ONLY in English.
+        3. Format all numbers, dates, and currencies clearly with comma separators.
+        4. Use professional Markdown (bold titles, clean bullet points).
         
         COMMANDER CAPABILITIES:
         You can trigger UI actions by including these specific tags at the END of your response (they will be hidden from the user but executed by the system):
