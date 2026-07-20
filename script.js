@@ -257,6 +257,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const certifications = [
         {
+            title_en: "Microsoft Certified: Power BI Data Analyst Associate",
+            title_ar: "شهادة مايكروسوفت المعتمدة: محلل بيانات Power BI",
+            issuer: "Microsoft",
+            platform: "Microsoft Learn",
+            date_en: "Jul 2026",
+            date_ar: "يوليو 2026",
+            link: "https://learn.microsoft.com/en-us/users/abasmohamed40104171-4777/credentials/b10d558047967b1b",
+            icon: "fab fa-microsoft"
+        },
+        {
             title_en: "Foundations: Data Everywhere",
             title_ar: "أسس البيانات",
             issuer: "Google",
