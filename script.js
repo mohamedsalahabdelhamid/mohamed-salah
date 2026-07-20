@@ -192,6 +192,66 @@ document.addEventListener('DOMContentLoaded', () => {
             thumbnail: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/mohamed-salah"
+        },
+        {
+            id: 20,
+            title_en: "RAGify — AI Document Intelligence",
+            title_ar: "منصة RAGify لذكاء الوثائق بالذكاء الاصطناعي",
+            category: "Software Solutions",
+            desc_en: "A powerful RAG platform for uploading documents, asking intelligent questions, and generating auto dashboards.",
+            desc_ar: "منصة RAG قوية لرفع الوثائق والطرح أسئلة ذكية وإنشاء لوحات تحكم تلقائية.",
+            details_en: "A locally-hosted Retrieval-Augmented Generation and Data Analytics platform. Upload PDF, DOCX, Excel, and images, then ask natural language questions. Uses FastAPI backend, Next.js frontend, FAISS vector search, and Gemini/Groq LLMs with Docker deployment.",
+            details_ar: "منصة استرجاع مُعزَّز وتحليل بيانات مستضافة محلياً. ارفع ملفات PDF وDOCX وإكسل والصور ثم اطرح أسئلة بلغة طبيعية. تستخدم FastAPI للخادم وNext.js للواجهة وFAISS للبحث المتجهي ونماذج Gemini/Groq مع نشر Docker.",
+            enhancements_en: "Add support for more file types, implement user authentication, and add collaborative document annotations.",
+            enhancements_ar: "إضافة دعم لأنواع ملفات أخرى، وتنفيذ مصادقة المستخدمين، وإضافة تعليقات تعاونية على الوثائق.",
+            thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/RAGify"
+        },
+        {
+            id: 17,
+            title_en: "Lexus Car Website",
+            title_ar: "موقع سيارات ليكوس",
+            category: "Web Development",
+            desc_en: "A modern, responsive car showcase website with sleek design and smooth animations.",
+            desc_ar: "موقع ويب عرض سيارات حديث ومتجاوب بتصميم أنيق ورسوم متحركة سلسة.",
+            details_en: "A beautifully designed Lexus car showcase website built with HTML, CSS, and JavaScript. Features a responsive layout, image galleries, smooth scroll animations, and a modern UI for an immersive car browsing experience.",
+            details_ar: "موقع عرض سيارات ليكوس مصمم بشكل جميل باستخدام HTML وCSS وJavaScript. يتضمن تخطيطاً متجاوباً ومعرض صور ورسوم متحركة سلسة وواجهة مستخدم حديثة لتجربة تصفح غامرة.",
+            enhancements_en: "Add a 3D car configurator, integrate a booking system for test drives, and add multi-language support.",
+            enhancements_ar: "إضافة مُعدِّل سيارات ثلاثي الأبعاد، ودمج نظام حجز قيود تجريبية، وإضافة دعم تعدد اللغات.",
+            thumbnail: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/LEXUS-CAR"
+        },
+        {
+            id: 18,
+            title_en: "PL-300 Exam Center",
+            title_ar: "مركز امتحانات PL-300",
+            category: "Software Solutions",
+            desc_en: "A web-based practice exam platform for Microsoft PL-300 Power BI certification with 369 questions.",
+            desc_ar: "منصة امتحانات تدريبية عبر الويب لشهادة Microsoft PL-300 Power BI مع 369 سؤالاً.",
+            details_en: "A comprehensive exam preparation platform for the Microsoft PL-300 Power BI Data Analyst certification. Features 6 full-length practice exams with 369 questions, timed sessions, instant feedback, drag-and-drop support, flag for review, and 7 community-verified answer corrections. Built with FastAPI, Jinja2, and vanilla JS.",
+            details_ar: "منصة شاملة للتحضير لشهادة Microsoft PL-300 Power BI Data Analyst. تتضمن 6 امتحانات تدريبية كاملة مع 369 سؤالاً، جلسات مؤقتة، تغذية راجعة فورية، دعم السحب والإفلات، علامة للمراجعة، و7 تصحيحات موثقة. مبنية باستخدام FastAPI وJinja2 وJavaScript.",
+            enhancements_en: "Add performance analytics dashboard, spaced repetition learning, and a community-contributed question bank.",
+            enhancements_ar: "إضافة لوحة تحليلات الأداء، نظام تعلم متكرر متباعد، وبنك أسهم مساهم من المجتمع.",
+            thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/PL300-Exams"
+        },
+        {
+            id: 19,
+            title_en: "Khamsat Deep Scanner PRO",
+            title_ar: "الماسح العميق خمسات برو",
+            category: "Software Solutions",
+            desc_en: "AI-powered monitoring tool for Khamsat platform with real-time scraping and auto proposal generation.",
+            desc_ar: "أداة مراقبة مدعومة بالذكاء الاصطناعي لمنصة خمسات مع كشط مباشر وإنشاء عروض آلية.",
+            details_en: "A smart monitoring tool for the Khamsat freelancing platform. Automatically scans new requests, analyzes them with AI (Ollama Llama3), calculates skill match percentages, and generates professional proposals. Features a real-time WebSocket dashboard, dark/light mode, anti-ban protection, and Docker deployment.",
+            details_ar: "أداة مراقبة ذكية لمنصة خمسات للعمل الحر. تفحص الطلبات الجديدة تلقائياً وتحللها بالذكاء الاصطناعي (Ollama Llama3) وتحسب نسب التوافق مع مهاراتك وتُنشئ عروض احترافية. تتضمن لوحة تحكم WebSocket فورية، وضع مظلم/مضيء، حماية من الحظر، ونشر Docker.",
+            enhancements_en: "Add multi-platform support (Mostaql, Freelancer), implement ML-based bid price optimization, and add email notification alerts.",
+            enhancements_ar: "إضافة دعم منصات متعددة (مستقل، فريلانسر)، وتنفيذ تحسين سعر العرض بالتعلم الآلي، وإضافة تنبيهات إشعارات البريد الإلكتروني.",
+            thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/Khamsat_Live_Feed"
         }
     ];
 
