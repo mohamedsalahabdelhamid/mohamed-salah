@@ -781,7 +781,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const startYear = 2023;
         const currentYear = new Date().getFullYear();
         const yearsExp = Math.max(currentYear - startYear, 3); // At least 3+
-        const projectCount = 30; // Set strictly to 30 as requested
+        const projectCount = projects.length;
 
         const statsMap = {
             'stat-years': yearsExp,        // e.g. 3+ (matches bio text)
@@ -1548,6 +1548,19 @@ document.addEventListener('DOMContentLoaded', () => {
         context += "\nProfessional Experience:\n";
         experience.forEach(e => {
             context += `- ${e.role_en} at ${e.company_en} (${e.date_en})\n`;
+        });
+        context += "\nVolunteering:\n";
+        volunteering.forEach(v => {
+            context += `- ${v.role_en} at ${v.company_en} (${v.date_en})\n`;
+        });
+        context += "\nSkills:\n";
+        skills.forEach(s => {
+            const items = s.items.map(i => `${i.name} (${i.progress})`).join(", ");
+            context += `- ${s.category_en}: ${items}\n`;
+        });
+        context += "\nServices Offered:\n";
+        services.forEach(s => {
+            context += `- ${s.title_en} (${s.category}): ${s.desc_en}\n`;
         });
         return context;
     };

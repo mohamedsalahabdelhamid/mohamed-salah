@@ -196,21 +196,8 @@ class PortfolioChatbot {
             return `${category}: ${tags}`;
         }).join(" | ");
 
-        // Experience Data
-        const experience = Array.from(document.querySelectorAll('.experience-card')).map(card => {
-            const pos = card.querySelector('h3')?.innerText || "";
-            const company = card.querySelector('.company')?.innerText || "";
-            const desc = card.querySelector('.exp-desc')?.innerText || "";
-            return `${pos} at ${company}: ${desc}`;
-        }).join(" | ");
-
-        // Projects Data
-        const projects = Array.from(document.querySelectorAll('.project-card')).map(card => {
-            const title = card.querySelector('h3')?.innerText || "";
-            const desc = card.querySelector('.project-desc')?.innerText || "";
-            const tags = Array.from(card.querySelectorAll('.project-tags span')).map(s => s.innerText).join(", ");
-            return `${title}: ${desc} (Tech: ${tags})`;
-        }).join(" | ");
+        // Projects, Certifications & Experience Data (read ALL from arrays, not just visible DOM)
+        const fullContext = window.getPortfolioContext ? window.getPortfolioContext() : "";
 
         this.siteContext = `
             USER_PORTFOLIO_CONTEXT:
@@ -219,8 +206,7 @@ class PortfolioChatbot {
             Bio: ${bio}
             Professional Summary: ${aboutText}
             Key Skills: ${skills}
-            Work Experience: ${experience}
-            Top Projects: ${projects}
+            ${fullContext}
         `.trim();
     }
 
