@@ -35,6 +35,14 @@
       "visible": true
     },
     {
+      "id": "card-repo",
+      "icon": "github",
+      "label_ar": "ريبو البطاقة",
+      "label_en": "Card Repo",
+      "url": "https://github.com/mohamedsalahabdelhamid/mohamed-salah",
+      "visible": true
+    },
+    {
       "id": "cv",
       "icon": "cv",
       "label_ar": "السيرة الذاتية",
