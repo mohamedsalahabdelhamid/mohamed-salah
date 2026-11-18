@@ -252,7 +252,157 @@ document.addEventListener('DOMContentLoaded', () => {
             thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=75&w=600",
             videoSrc: null,
             githubLink: "https://github.com/mohamedsalahabdelhamid/Khamsat_Live_Feed"
-        }
+        },
+        {
+            id: 21,
+            title_en: "Road Accident Analysis Insights",
+            title_ar: "رؤى تحليل حوادث الطرق",
+            category: "Exploratory Data Analysis",
+            desc_en: "Exploratory analysis of road accident records to uncover patterns and safety insights.",
+            desc_ar: "تحليل استكشافي لبيانات حوادث الطرق لاستخراج الأنماط ورؤى السلامة.",
+            details_en: "Python-based EDA covering data cleaning, visualization and actionable insights from the road accident dataset.",
+            details_ar: "تحليل استكشافي ببايثون يشمل تنظيف البيانات وتصورها واستخراج رؤى قابلة للتنفيذ من بيانات حوادث الطرق.",
+            enhancements_en: "Add severity prediction and geospatial hotspot mapping.",
+            enhancements_ar: "إضافة التنبؤ بخطورة الحوادث ورسم خرائط للمناطق الساخنة.",
+            thumbnail: "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/Accident-Data-Analysis-Insights"
+        },
+        {
+            id: 22,
+            title_en: "BlueMax ERP - RC08 Release",
+            title_ar: "بلوماكس إي آر بي - إصدار RC08",
+            category: "Accounting & ERP Systems",
+            desc_en: "Client release review and build package for the BlueMax ERP desktop system.",
+            desc_ar: "مراجعة إصدار العميل وحزمة البناء لنظام بلوماكس إي آر بي للسطح المكتب.",
+            details_en: "Windows desktop ERP build with installer, release notes and public file integrity hashes.",
+            details_ar: "نظام إي آر بي لسطح المكتب ويندوز مع مُثبّت وملاحظات الإصدار وهاشات تحقق عامة للملفات.",
+            enhancements_en: "Publish a marketing site and a dedicated user guide section.",
+            enhancements_ar: "نشر موقع تسويقي وقسم مخصص لدليل المستخدم.",
+            thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/BlueMax-RC08-20261029-01"
+        },
+        {
+            id: 23,
+            title_en: "AI Data Analytics Studio",
+            title_ar: "استوديو تحليل البيانات بالذكاء الاصطناعي",
+            category: "Data Analytics & AI",
+            desc_en: "Autonomous multi-LLM platform for data analysis and reporting automation.",
+            desc_ar: "منصة مستقلة متعددة النماذج اللغوية لتحليل البيانات وأتمتة التقارير.",
+            details_en: "React and Docker based workspace that combines multiple LLMs with analytics workflows and automated reporting.",
+            details_ar: "بيئة عمل مبنية بـ React و Docker تدمج عدة نماذج لغوية مع مسارات تحليل البيانات وأتمتة التقارير.",
+            enhancements_en: "Add connectors for Power BI and scheduled report delivery.",
+            enhancements_ar: "إضافة موصلات Power BI وجدولة إرسال التقارير.",
+            thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/Data_Analysis_Outomatiom"
+        },
+        {
+            id: 24,
+            title_en: "Ehky Ya Misr",
+            title_ar: "احكي يا مصر",
+            category: "Software Solutions",
+            desc_en: "Bilingual digital heritage storytelling platform with a full frontend and backend.",
+            desc_ar: "منصة رقمية ثنائية اللغة لسرد التراث المصري بواجهة وخلفية كاملتين.",
+            details_en: "A heritage storytelling experience combining curated content, interactive frontend and backend architecture.",
+            details_ar: "تجربة سرد تراثية تجمع محتوى منسقاً وواجهة تفاعلية وبنية خلفية متكاملة.",
+            enhancements_en: "Add community contributions and an editorial review workflow.",
+            enhancements_ar: "إضافة مساهمات المجتمع وسير عمل مراجعة تحريرية.",
+            thumbnail: "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/ehky-ya-misr"
+        },
+        {
+            id: 25,
+            title_en: "Nasijan - Garment Identity",
+            title_ar: "نساجان - هوية الملابس",
+            category: "Software Solutions",
+            desc_en: "Responsive bilingual website for a garment accessories and brand identity manufacturer.",
+            desc_ar: "موقع متجاوب ثنائي اللغة لشركة مصنعة لإكسسوارات الملابس وهويات العلامات.",
+            details_en: "Modern single-page website for a leading Egyptian garment accessories manufacturer, with Arabic and English content.",
+            details_ar: "موقع حديث من صفحة واحدة لشركة رائدة في إكسسوارات الملابس في مصر، بمحتوى عربي وإنجليزي.",
+            enhancements_en: "Add product catalogue filters and a wholesale enquiry form.",
+            enhancements_ar: "إضافة فلاتر لكتالوج المنتجات ونموذج استفسار بالجملة.",
+            thumbnail: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/Nasijan"
+        },
+        {
+            id: 26,
+            title_en: "Portfolio v1",
+            title_ar: "البورتفوليو - النسخة الأولى",
+            category: "Software Solutions",
+            desc_en: "Earlier iteration of the personal data portfolio website.",
+            desc_ar: "النسخة السابقة من الموقع الشخصي لتحليل البيانات.",
+            details_en: "An earlier responsive portfolio build used to test layout, sections and bilingual content structure.",
+            details_ar: "نسخة سابقة من بورتفوليو متجاوب استُخدمت لاختبار التخطيط والأقسام وهيكل المحتوى ثنائي اللغة.",
+            enhancements_en: "Keep as an archive reference for design evolution.",
+            enhancements_ar: "الاحتفاظ بها كمرجع أرشيفي لتطور التصميم.",
+            thumbnail: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/portfolio_1"
+        },
+        {
+            id: 27,
+            title_en: "Portfolio v2",
+            title_ar: "البورتفوليو - النسخة الثانية",
+            category: "Software Solutions",
+            desc_en: "Second iteration of the personal portfolio with expanded content and interactivity.",
+            desc_ar: "النسخة الثانية من البورتفوليو الشخصي بمحتوى وتفاعل موسعين.",
+            details_en: "A revised portfolio build with richer project presentation and interactive sections.",
+            details_ar: "نسخة مطورة من البورتفوليو بعرض مشاريع أثرى وأقسام تفاعلية.",
+            enhancements_en: "Archive alongside the current live portfolio.",
+            enhancements_ar: "أرشفتها بجانب البورتفوليو الحي الحالي.",
+            thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/portfolio_2"
+        },
+        {
+            id: 28,
+            title_en: "GitHub Profile README",
+            title_ar: "صفحة الملف الشخصي على جيت هاب",
+            category: "Software Solutions",
+            desc_en: "Profile README highlighting the data and BI focus of the GitHub account.",
+            desc_ar: "صفحة ملف شخصي على جيت هاب تبرز التركيز على تحليل البيانات وذكاء الأعمال.",
+            details_en: "A curated profile README that presents role, focus areas and pinned work for visitors.",
+            details_ar: "ملف README منسق للملف الشخصي يعرض الدور ومجالات التركيز والأعمال المثبتة للزوار.",
+            enhancements_en: "Keep the profile summary aligned with the current Data Analyst & BI Specialist title.",
+            enhancements_ar: "إبقاء ملخص الملف متوافقاً مع المسمى الحالي محلل بيانات وأخصائي ذكاء أعمال.",
+            thumbnail: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/mohamedsalahabdelhamid"
+        },
+        {
+            id: 29,
+            title_en: "QR Contact Card",
+            title_ar: "بطاقة التواصل بالكيو ار",
+            category: "Software Solutions",
+            desc_en: "A small editable contact page opened directly by a QR code.",
+            desc_ar: "صفحة تواصل صغيرة قابلة للتعديل يفتحها كيو ار كود مباشرة.",
+            details_en: "A lightweight bilingual card with photo, bio and editable links, served from its own GitHub Pages site.",
+            details_ar: "بطاقة خفيفة ثنائية اللغة بصورة ونبذة وروابط قابلة للتعديل، مستضافة على موقع GitHub Pages خاص.",
+            enhancements_en: "Add more link types and a printable QR layout.",
+            enhancements_ar: "إضافة أنواع روابط أكثر وتخطيط كيو ار للطباعة.",
+            thumbnail: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/card"
+        },
+        {
+            id: 30,
+            title_en: "BlueMax ERP - Marketing",
+            title_ar: "بلوماكس إي آر بي - صفحة تسويقية",
+            category: "Accounting & ERP Systems",
+            desc_en: "Marketing repository for the BlueMax ERP desktop system for factories.",
+            desc_ar: "مستودع تسويقي لنظام بلوماكس إي آر بي للسطح المكتب مخصص للمصانع.",
+            details_en: "Public-facing overview of a Windows desktop ERP system with features, licensing notes and an Arabic user guide.",
+            details_ar: "نظرة عامة عامة لنظام إي آر بي لسطح المكتب ويندوز مع المميزات وملاحظات الترخيص ودليل مستخدم عربي.",
+            enhancements_en: "Add screenshots, a feature comparison table and customer case studies.",
+            enhancements_ar: "إضافة لقطات شاشة وجدول مقارنة مميزات ودراسات حالة عملاء.",
+            thumbnail: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=75&w=600",
+            videoSrc: null,
+            githubLink: "https://github.com/mohamedsalahabdelhamid/BlueMax-ERP"
+        },
     ];
 
     const certifications = [
@@ -267,8 +417,18 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: "fab fa-microsoft"
         },
         {
-            title_en: "Foundations: Data Everywhere",
-            title_ar: "أسس البيانات",
+            title_en: "Microsoft Certified: Azure Data Fundamentals",
+            title_ar: "شهادة مايكروسوفت المعتمدة: أساسيات بيانات Azure",
+            issuer: "Microsoft",
+            platform: "Microsoft Learn",
+            date_en: "Oct 2026",
+            date_ar: "أكتوبر 2026",
+            link: "https://learn.microsoft.com/en-us/users/abasmohamed40104171-4777/credentials/certification/azure-data-fundamentals?tab=credentials-tab",
+            icon: "fab fa-microsoft"
+        },
+        {
+            title_en: "Foundations: Data, Data, Everywhere",
+            title_ar: "أساسيات البيانات",
             issuer: "Google",
             platform: "Coursera",
             date_en: "Jan 2026",
@@ -277,8 +437,8 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: "fab fa-google"
         },
         {
-            title_en: "Data-Driven Decisions",
-            title_ar: "اتخاذ قرارات مبنية على البيانات",
+            title_en: "Ask Questions to Make Data-Driven Decisions",
+            title_ar: "طرح الأسئلة لاتخاذ قرارات مبنية على البيانات",
             issuer: "Google",
             platform: "Coursera",
             date_en: "Jan 2026",
@@ -288,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title_en: "Prepare Data for Exploration",
-            title_ar: "إعداد البيانات",
+            title_ar: "إعداد البيانات للاستكشاف",
             issuer: "Google",
             platform: "Coursera",
             date_en: "Feb 2026",
@@ -297,8 +457,8 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: "fab fa-google"
         },
         {
-            title_en: "Process Data: Dirty to Clean",
-            title_ar: "معالجة ونموذج البيانات",
+            title_en: "Process Data from Dirty to Clean",
+            title_ar: "معالجة البيانات من غير منظمة إلى نظيفة",
             issuer: "Google",
             platform: "Coursera",
             date_en: "Feb 2026",
@@ -307,8 +467,8 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: "fab fa-google"
         },
         {
-            title_en: "Business Agility",
-            title_ar: "الرشاقة في العمل",
+            title_en: "Delivering Quality Work with Agility",
+            title_ar: "تقديم عمل عالي الجودة باستخدام الرشاقة",
             issuer: "IBM",
             platform: "Coursera",
             date_en: "Feb 2026",
@@ -323,17 +483,37 @@ document.addEventListener('DOMContentLoaded', () => {
             platform: "Coursera",
             date_en: "Mar 2026",
             date_ar: "مارس 2026",
+            link: "https://coursera.org/verify/7PF2YYGS4N1Z",
+            icon: "fab fa-google"
+        },
+        {
+            title_en: "Share Data Through the Art of Visualization",
+            title_ar: "مشاركة البيانات من خلال التصور",
+            issuer: "Google",
+            platform: "Coursera",
+            date_en: "Mar 2026",
+            date_ar: "مارس 2026",
             link: "https://coursera.org/verify/FR6K5I2J0QPY",
             icon: "fab fa-google"
         },
         {
-            title_en: "Accelerate Your Job Search with AI",
-            title_ar: "تسريع البحث عن وظيفة باستخدام الذكاء الاصطناعي",
+            title_en: "Data Analysis with R Programming",
+            title_ar: "تحليل البيانات باستخدام R",
             issuer: "Google",
             platform: "Coursera",
-            date_en: "Apr 2026",
-            date_ar: "أبريل 2026",
-            link: "https://coursera.org/verify/LGWC8HLSQ5VK",
+            date_en: "Mar 2026",
+            date_ar: "مارس 2026",
+            link: "https://coursera.org/verify/U9EBZ9V2CA8Q",
+            icon: "fab fa-google"
+        },
+        {
+            title_en: "Google Data Analytics Capstone: Complete a Case Study",
+            title_ar: "مشروع التخرج في تحليل البيانات: دراسة حالة",
+            issuer: "Google",
+            platform: "Coursera",
+            date_en: "Mar 2026",
+            date_ar: "مارس 2026",
+            link: "https://coursera.org/verify/FY2Z21VCKQO1",
             icon: "fab fa-google"
         },
         {
@@ -345,13 +525,83 @@ document.addEventListener('DOMContentLoaded', () => {
             date_ar: "مارس 2026",
             link: "https://coursera.org/verify/WCG4CYJSVDWH",
             icon: "fab fa-google"
+        },
+        {
+            title_en: "Accelerate Your Job Search with AI",
+            title_ar: "تسريع البحث عن وظيفة باستخدام الذكاء الاصطناعي",
+            issuer: "Google",
+            platform: "Coursera",
+            date_en: "Mar 2026",
+            date_ar: "مارس 2026",
+            link: "https://coursera.org/verify/LGWC8HLSQ5VK",
+            icon: "fab fa-google"
+        },
+        {
+            title_en: "Preparing Data for Analysis with Microsoft Excel",
+            title_ar: "إعداد البيانات للتحليل باستخدام Microsoft Excel",
+            issuer: "Microsoft",
+            platform: "Coursera",
+            date_en: "Jul 2026",
+            date_ar: "يوليو 2026",
+            link: "https://coursera.org/verify/10HB3WIF96OU",
+            icon: "fab fa-microsoft"
+        },
+        {
+            title_en: "AI Agent Fundamentals with Azure AI Foundry",
+            title_ar: "أساسيات وكلاء الذكاء الاصطناعي بـ Azure AI Foundry",
+            issuer: "Microsoft",
+            platform: "Coursera",
+            date_en: "Aug 2026",
+            date_ar: "أغسطس 2026",
+            link: "https://coursera.org/verify/39BXB3VUS76C",
+            icon: "fab fa-microsoft"
+        },
+        {
+            title_en: "Building Intelligent Agent Workflows",
+            title_ar: "بناء مسارات عمل ذكية لوكلاء الذكاء الاصطناعي",
+            issuer: "Microsoft",
+            platform: "Coursera",
+            date_en: "Aug 2026",
+            date_ar: "أغسطس 2026",
+            link: "https://coursera.org/verify/VJXNJ8TBD2BS",
+            icon: "fab fa-microsoft"
+        },
+        {
+            title_en: "Code and Framework Based Agent Development",
+            title_ar: "تطوير الوكلاء بناءً على الكود والأطر العمل",
+            issuer: "Microsoft",
+            platform: "Coursera",
+            date_en: "Aug 2026",
+            date_ar: "أغسطس 2026",
+            link: "https://coursera.org/verify/8TRTUGZ8ZGQO",
+            icon: "fab fa-microsoft"
+        },
+        {
+            title_en: "Building Multi-Agent Systems",
+            title_ar: "بناء أنظمة متعددة الوكلاء",
+            issuer: "Microsoft",
+            platform: "Coursera",
+            date_en: "Aug 2026",
+            date_ar: "أغسطس 2026",
+            link: "https://coursera.org/verify/NNEV3PNWS518",
+            icon: "fab fa-microsoft"
+        },
+        {
+            title_en: "Harnessing the Power of Data with Power BI",
+            title_ar: "الاستفادة من قوة البيانات باستخدام Power BI",
+            issuer: "Microsoft",
+            platform: "Coursera",
+            date_en: "Aug 2026",
+            date_ar: "أغسطس 2026",
+            link: "https://coursera.org/verify/YMRXKD1S2N3D",
+            icon: "fab fa-microsoft"
         }
     ];
 
     const experience = [
         {
-            role_en: "Data Analytics & AI Specialist",
-            role_ar: "أخصائي تحليل بيانات وذكاء اصطناعي",
+            role_en: "Data Analyst & BI Specialist",
+            role_ar: "محلل بيانات وأخصائي ذكاء أعمال",
             company_en: "Digilians | Cairo, Egypt",
             company_ar: "Digilians | القاهرة، مصر",
             date_en: "Dec 2025 - Present",
@@ -1940,12 +2190,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const titlePhrases = lang === 'ar'
             ? [
-                'مهندس بيانات (Data Engineer)',
-                'أخصائي ذكاء أعمال (BI Specialist)'
+                'محلل بيانات وأخصائي ذكاء أعمال'
             ]
             : [
-                'Data Engineer',
-                'Business Intelligence Specialist'
+                'Data Analyst & BI Specialist'
             ];
 
         let titleIdx = 0, charIdx = 0, isDeleting = false;
